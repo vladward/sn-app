@@ -3,10 +3,18 @@ import React from "react"
 const Navbar = () => {
     return (
         <nav className='nav'>
-            <div>Profile</div>
-            <div>Messages</div>
-            <div>News</div>
-            <div>Settings</div>
+            <div className="item">
+                <a>Profile</a>
+            </div>
+            <div className="item">
+                <a>Messages</a>
+            </div>
+            <div className="item">
+                <a>News</a>
+            </div>
+            <div className="item">
+                <a>Settings</a>
+            </div>
         </nav>
     )
 }
