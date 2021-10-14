@@ -1,17 +1,13 @@
 import React from 'react';
 import './App.css';
 import Header from "./components/Header/Header";
+import Navbar from "./components/Navbar/Navbar";
 
 function App() {
     return (
         <div className="app-wrapper">
             <Header/>
-            <nav className='nav'>
-              <div>Profile</div>
-              <div>Messages</div>
-              <div>News</div>
-              <div>Settings</div>
-            </nav>
+            <Navbar/>
           <div className='content'>
             <div>
               <img src="https://tinypng.com/images/social/website.jpg" alt=""/>
