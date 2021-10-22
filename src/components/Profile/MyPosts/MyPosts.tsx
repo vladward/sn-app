@@ -3,10 +3,10 @@ import s from "./MyPosts.module.css"
 import Post from "./Post/Post"
 
 
-let postState = [
-    {id: 1, message: 'Hi how are you', likeCount: 3},
-    {id: 2, message: 'Yes no problem', likeCount: 6},
-
+let posts = [
+    {id: 1, message: "Hi how are you", likeCount: 3},
+    {id: 2, message: "Yes no problem", likeCount: 6},
+    {id: 3, message: "Ok, let's go", likeCount: 8},
 ]
 
 
@@ -23,8 +23,7 @@ const MyPosts = () => {
                 </div>
             </div>
             <div className={s.posts}>
-                <Post message={postState[0].message} likeCount={postState[0].likeCount}/>
-                <Post message={postState[1].message} likeCount={postState[0].likeCount}/>
+                {posts.map( p => <Post message={p.message} likeCount={p.likeCount}/> )}
             </div>
         </div>
     )
