@@ -1,40 +1,12 @@
+import {ProfilePageType} from "../components/Profile/Profile"
+import {DialogPageType} from "../components/Dialogs/Dialogs";
 
-type MessageType = {
-    id: number
-    message: string
-}
-
-type DialogType = {
-    id: number
-    name: string
-    src: string
-}
-
-type PostType = {
-    id: number
-    message: string
-    likeCount: number
-}
-
-type ProfilePageType = {
-    posts: Array<PostType>
-}
-
-type DialogPageType = {
-    dialogs: Array<DialogType>
-    messages: Array<MessageType>
-}
-
-type SidebarType = {}
-
-type RootStateType = {
+export type RootStateType = {
     profilePage: ProfilePageType
     dialogsPage: DialogPageType
-    sidebar: SidebarType
 }
 
-
-let state: RootStateType = {
+export let state: RootStateType = {
     profilePage: {
          posts: [
             {id: 1, message: "Hi how are you", likeCount: 3},
@@ -52,9 +24,7 @@ let state: RootStateType = {
             {id: 1, message: "Hi"},
             {id: 2, message: "Bye"}
         ]
-    },
-    sidebar: {}
-
+    }
 }
 
 export default state
