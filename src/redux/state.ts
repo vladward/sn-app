@@ -1,6 +1,13 @@
-import {ProfilePageType} from "../components/Profile/Profile"
-import {DialogPageType} from "../components/Dialogs/Dialogs";
+import {ProfileType} from "../components/Profile/Profile"
+import {DialogType, MessageType} from "../components/Dialogs/Dialogs"
 
+export type ProfilePageType = {
+    posts: Array<ProfileType>
+}
+export type DialogPageType = {
+    dialogs: Array<DialogType>
+    messages: Array<MessageType>
+}
 export type RootStateType = {
     profilePage: ProfilePageType
     dialogsPage: DialogPageType
@@ -25,6 +32,15 @@ export let state: RootStateType = {
             {id: 2, message: "Bye"}
         ]
     }
+}
+
+export let addPost = (postMessage: any) => {
+    let newPost = {
+        id: 5,
+        message: postMessage,
+        likeCount: 1
+    }
+    state.profilePage.posts.push(newPost)
 }
 
 export default state

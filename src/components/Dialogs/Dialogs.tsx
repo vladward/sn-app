@@ -2,6 +2,7 @@ import React from "react"
 import DialogItem from "./DialogItem/DialogsItem"
 import s from "./Dialogs.module.css"
 import Message from "./Message/Message"
+import {DialogPageType} from "../../redux/state";
 
 export type DialogType = {
     id: number
@@ -12,10 +13,7 @@ export type MessageType = {
     id: number
     message: string
 }
-export type DialogPageType = {
-    dialogs: Array<DialogType>
-    messages: Array<MessageType>
-}
+
 const Dialogs = (props: DialogPageType) => {
 
     return (

@@ -8,6 +8,7 @@ import {BrowserRouter, Route} from "react-router-dom";
 
 
 type AppPropsType = {
+    addPost: (postMessage: string) => void
     dialogs: Array<DialogType>
     posts: Array<ProfileType>
     messages: Array<MessageType>
@@ -24,7 +25,7 @@ const App = (props: AppPropsType) => {
                            render={ () => <Dialogs dialogs={props.dialogs}
                                                    messages={props.messages}/> }/>
                     <Route path='/profile'
-                           render={ () => <Profile posts={props.posts} /> }/>
+                           render={ () => <Profile posts={props.posts} addPost={props.addPost}/> }/>
                 </div>
             </div>
         </BrowserRouter>
