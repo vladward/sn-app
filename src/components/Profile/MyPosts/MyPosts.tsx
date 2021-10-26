@@ -9,11 +9,11 @@ type MyPostsType = {
 }
 
 const MyPosts = (props: MyPostsType) => {
-    let newPostElement = createRef<HTMLInputElement>()
+    let newPostElement = React.createRef<HTMLInputElement>()
     let postsElements = props.posts.map( p => <Post message={p.message} likeCount={p.likeCount} id={p.id}/> )
 
     const addPost = () => {
-        let text = newPostElement.current
+        let text = newPostElement.current?.value
         props.addPost(text)
     }
 

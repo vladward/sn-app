@@ -1,5 +1,6 @@
 import {ProfileType} from "../components/Profile/Profile"
 import {DialogType, MessageType} from "../components/Dialogs/Dialogs"
+import {rerenderEntireTree} from "../render";
 
 export type ProfilePageType = {
     posts: Array<ProfileType>
@@ -41,6 +42,7 @@ export let addPost = (postMessage: any) => {
         likeCount: 1
     }
     state.profilePage.posts.push(newPost)
+    rerenderEntireTree(state)
 }
 
 export default state
