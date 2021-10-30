@@ -1,25 +1,25 @@
 import React from "react"
-import MyPosts from "./MyPosts/MyPosts"
+import MyPosts, {ProfileType} from "./MyPosts/MyPosts"
 import s from "./Profile.module.css"
 import ProfileInfo from "./ProfileInfo/ProfileInfo"
 import {ProfilePageType} from "../../redux/state";
 
-
-export type ProfileType = {
-    id: number
-    message: string
-    likeCount: number
+export type ProfilePropsType = {
+    addPost: () => void
+    updateNewPostText: (newText: string) => void
+    posts: Array<ProfileType>
+    newPostText: string
 }
 
-export type AddPostType = {
-    addPost: (newPostMessage: string) => void
-}
-
-const Profile: React.FC<ProfilePageType & AddPostType> = (props) => {
+const Profile = (props: ProfilePropsType) => {
     return (
         <div>
-            <ProfileInfo />
-            <MyPosts posts={props.posts} addPost={props.addPost}/>
+            <ProfileInfo/>
+            <MyPosts posts={props.posts}
+                     newPostText={props.newPostText}
+                     addPost={props.addPost}
+                     updateNewPostText={props.updateNewPostText}
+            />
         </div>
     )
 }
