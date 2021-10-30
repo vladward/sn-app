@@ -1,9 +1,9 @@
-import {ProfileType} from "../components/Profile/Profile"
 import {DialogType, MessageType} from "../components/Dialogs/Dialogs"
-import {rerenderEntireTree} from "../render";
+import {ProfileType} from "../components/Profile/MyPosts/MyPosts";
 
 export type ProfilePageType = {
     posts: Array<ProfileType>
+    newPostText: string
 }
 export type DialogPageType = {
     dialogs: Array<DialogType>
@@ -14,13 +14,18 @@ export type RootStateType = {
     dialogsPage: DialogPageType
 }
 
+let rerenderEntireTree = (state: RootStateType) => {
+    console.log('state change')
+}
+
 export let state: RootStateType = {
     profilePage: {
          posts: [
             {id: 1, message: "Hi how are you", likeCount: 3},
             {id: 2, message: "Yes no problem", likeCount: 6},
             {id: 3, message: "Ok, let's go", likeCount: 8},
-        ]
+        ],
+        newPostText: ''
     },
     dialogsPage: {
         dialogs: [
@@ -35,14 +40,24 @@ export let state: RootStateType = {
     }
 }
 
-export let addPost = (postMessage: any) => {
-    let newPost = {
+export let addPost = () => {
+    let newPost: ProfileType = {
         id: 5,
-        message: postMessage,
+        message: state.profilePage.newPostText,
         likeCount: 1
     }
     state.profilePage.posts.push(newPost)
+    state.profilePage.newPostText = ''
     rerenderEntireTree(state)
+}
+
+export const updateNewPostText = (newText: string) => {
+    state.profilePage.newPostText = newText
+    rerenderEntireTree(state)
+}
+
+export const subscribe = (observer: any) => {
+    rerenderEntireTree = observer
 }
 
 export default state
