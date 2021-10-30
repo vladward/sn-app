@@ -1,6 +1,6 @@
 import s from "./Post.module.css";
 import React from "react";
-import {ProfileType} from "../../Profile";
+import {ProfileType} from "../MyPosts";
 
 const Post = (props: ProfileType) => {
     return (
