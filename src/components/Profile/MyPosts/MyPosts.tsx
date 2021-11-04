@@ -1,7 +1,6 @@
 import React, {ChangeEvent} from "react"
 import s from "./MyPosts.module.css"
 import Post from "./Post/Post"
-import {ProfilePageType} from "../../../redux/state";
 
 export type ProfileType = {
     id: number
