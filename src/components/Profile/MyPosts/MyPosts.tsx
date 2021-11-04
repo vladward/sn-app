@@ -37,7 +37,7 @@ const MyPosts = (props: MyPostsType) => {
             <h3>My Posts</h3>
             <div>
                 <div>
-                    <textarea placeholder={'Text'} onChange={onPostChange} value={props.newPostText} ></textarea>
+                    <textarea placeholder={'Text'} onChange={onPostChange} value={props.newPostText}/>
                 </div>
                 <div>
                     <button onClick={addPost}>Add post</button>
