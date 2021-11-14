@@ -38,7 +38,7 @@ let store = {
             ]
         }
     },
-    rerenderEntireTree(state: RootStateType) {
+    _callSubscriber(state: RootStateType) {
         console.log('state change')
     },
     addPost() {
@@ -47,16 +47,19 @@ let store = {
             message: this._state.profilePage.newPostText,
             likeCount: 1
         }
-        this._state.profilePage.posts.push(newPost)
-        this._state.profilePage.newPostText = ''
-        this.rerenderEntireTree(this._state)
+        this.getState().profilePage.posts.push(newPost)
+        this.getState().profilePage.newPostText = ''
+        this._callSubscriber(this._state)
     },
     updateNewPostText(newText: string) {
-        this._state.profilePage.newPostText = newText
-        this.rerenderEntireTree(this._state)
+        this.getState().profilePage.newPostText = newText
+        this._callSubscriber(this._state)
     },
     subscribe(observer: any) {
-        this.rerenderEntireTree = observer
+        this._callSubscriber = observer
+    },
+    getState() {
+        return this._state
     }
 }
 
