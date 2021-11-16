@@ -59,22 +59,23 @@ const store: StoreType = {
     _callSubscriber() {
         console.log('state change')
     },
-    addPost() {
-        let newPost: ProfileType = {
-            id: 5,
-            message: this._state.profilePage.newPostText,
-            likeCount: 1
+    dispatch(action) {
+        if(action.type === 'ADD-POST') {
+            let newPost: ProfileType = {
+                id: 5,
+                message: this._state.profilePage.newPostText,
+                likeCount: 1
+            }
+            this.getState().profilePage.posts.push(newPost)
+            this.getState().profilePage.newPostText = ''
+            this._callSubscriber()
+        } else if (action.type === 'UPDATE-NEW-POST-TEXT') {
+            this.getState().profilePage.newPostText = action.newText
+            this._callSubscriber()
         }
-        this.getState().profilePage.posts.push(newPost)
-        this.getState().profilePage.newPostText = ''
-        this._callSubscriber(this._state)
     },
-    updateNewPostText(newText: string) {
-        this.getState().profilePage.newPostText = newText
-        this._callSubscriber(this._state)
-    },
-    subscribe(observer: any) {
-        this._callSubscriber = observer
+    subscribe(callback) {
+        this._callSubscriber = callback
     },
     getState() {
         return this._state
