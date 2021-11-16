@@ -14,9 +14,27 @@ export type RootStateType = {
     dialogsPage: DialogPageType
 }
 
+export type StoreType = {
+    _state: RootStateType
+    getState: () => RootStateType
+    dispatch: (action: ActionType) => void
+    _callSubscriber: () => void
+    subscribe: (callback: () => void) => void
+}
+
+type AddPostActionType = {
+    type: 'ADD-POST'
+    //postText: string
+}
+type UpdateNewPostTextActopnType = {
+    type : 'UPDATE-NEW-POST-TEXT'
+    newText: string
+}
+export type ActionType = AddPostActionType | UpdateNewPostTextActopnType
 
 
-let store = {
+
+const store: StoreType = {
     _state: {
         profilePage: {
             posts: [
@@ -38,7 +56,7 @@ let store = {
             ]
         }
     },
-    _callSubscriber(state: RootStateType) {
+    _callSubscriber() {
         console.log('state change')
     },
     addPost() {
