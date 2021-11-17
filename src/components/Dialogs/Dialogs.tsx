@@ -6,9 +6,8 @@ import {
     ActionType,
     DialogType,
     MessageType,
-    sendMessageActionCreator,
-    updateNewMessageBodyActionCreator
 } from "../../redux/state";
+import {sendMessageActionCreator, updateNewMessageBodyActionCreator} from "../../redux/dialogsReducer";
 
 export type DialogPropsType = {
     dialogs: Array<DialogType>
