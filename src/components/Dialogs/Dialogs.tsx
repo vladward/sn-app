@@ -2,12 +2,19 @@ import React from "react"
 import DialogItem from "./DialogItem/DialogsItem"
 import s from "./Dialogs.module.css"
 import Message from "./Message/Message"
-import {DialogPageType} from "../../redux/state";
+import {
+    ActionType,
+    DialogType,
+    MessageType,
+    sendMessageActionCreator,
+    updateNewMessageBodyActionCreator
+} from "../../redux/state";
 
-export type DialogType = {
-    id: number
-    name: string
-    src: string
+export type DialogPropsType = {
+    dialogs: Array<DialogType>
+    messages: Array<MessageType>
+    newMessageBody: string
+    dispatch: (action: ActionType) => void
 }
 export type MessageType = {
     id: number
