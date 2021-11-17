@@ -37,7 +37,7 @@ export type ActionType = AddPostActionType | UpdateNewPostTextActionType
 
 
 
-const store: StoreType = {
+export const store: StoreType = {
     _state: {
         profilePage: {
             posts: [
