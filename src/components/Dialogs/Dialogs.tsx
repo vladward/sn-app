@@ -1,4 +1,4 @@
-import React from "react"
+import React, {ChangeEvent, KeyboardEvent} from "react"
 import DialogItem from "./DialogItem/DialogsItem"
 import s from "./Dialogs.module.css"
 import Message from "./Message/Message"
@@ -16,20 +16,40 @@ export type DialogPropsType = {
     newMessageBody: string
     dispatch: (action: ActionType) => void
 }
-export type MessageType = {
-    id: number
-    message: string
-}
 
-const Dialogs = (props: DialogPageType) => {
+const Dialogs = (props: DialogPropsType) => {
+    const newMessageBody = props.newMessageBody
+    const onChangeMessage = (e: ChangeEvent<HTMLInputElement>) => {
+        let body = e.currentTarget.value
+        props.dispatch(updateNewMessageBodyActionCreator(body))
+    }
+    const sendMessageBody = () => {
+        props.dispatch(sendMessageActionCreator())
+    }
+    const onEnterMessage = (e: KeyboardEvent<HTMLInputElement>) => {
+        if (e.key === 'Enter') {
+            sendMessageBody()
+        }
+    }
 
     return (
         <div className={s.dialogs}>
             <div className={s.dialogsItems}>
-                {props.dialogs.map(d => <DialogItem name={d.name} id={d.id} src={d.src}/>)}
+                {props.dialogs.map((d, i) => <DialogItem key={i} name={d.name} id={d.id} src={d.src} />)}
             </div>
             <div className={s.messages}>
-                {props.messages.map(m => <Message message={m.message} id={m.id}/>)}
+                {props.messages.map((m, i) => <Message key={i} message={m.message} id={m.id} />)}
+            </div>
+            <div>
+                <div>
+                    <input placeholder="Enter you message..."
+                           value={newMessageBody}
+                           onKeyPress={onEnterMessage}
+                           onChange={onChangeMessage}/>
+                </div>
+                <div>
+                    <button onClick={sendMessageBody}>Add</button>
+                </div>
             </div>
         </div>
     )
