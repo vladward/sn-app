@@ -1,9 +1,22 @@
-import {DialogType, MessageType} from "../components/Dialogs/Dialogs"
-import {ProfileType} from "../components/Profile/MyPosts/MyPosts"
-const ADD_POST = 'ADD-POST'
-const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT'
+const ADD_POST = 'ADD_POST'
+const UPDATE_NEW_POST_TEXT = 'UPDATE_NEW_POST_TEXT'
+const SEND_MESSAGE = 'SEND_MESSAGE'
+const UPDATE_NEW_MESSAGE_BODY = 'UPDATE_NEW_MESSAGE_BODY'
 
-
+export type MessageType = {
+    id: number
+    message: string
+}
+export type DialogType = {
+    id: number
+    name: string
+    src: string
+}
+export type ProfileType = {
+    id: number
+    message: string
+    likeCount: number
+}
 export type ProfilePageType = {
     posts: Array<ProfileType>
     newPostText: string
@@ -11,12 +24,12 @@ export type ProfilePageType = {
 export type DialogPageType = {
     dialogs: Array<DialogType>
     messages: Array<MessageType>
+    newMessageBody: string
 }
 export type RootStateType = {
     profilePage: ProfilePageType
     dialogsPage: DialogPageType
 }
-
 export type StoreType = {
     _state: RootStateType
     getState: () => RootStateType
@@ -26,14 +39,21 @@ export type StoreType = {
 }
 
 type AddPostActionType = {
-    type: 'ADD-POST'
+    type: 'ADD_POST'
     //postText: string
 }
 type UpdateNewPostTextActionType = {
-    type : 'UPDATE-NEW-POST-TEXT'
+    type : 'UPDATE_NEW_POST_TEXT'
     newText: string
 }
-export type ActionType = AddPostActionType | UpdateNewPostTextActionType
+type SendMessageActionType = {
+    type: 'SEND_MESSAGE'
+}
+type UpdateNewMessageBodyActionType = {
+    type : 'UPDATE_NEW_MESSAGE_BODY'
+    body: string
+}
+export type ActionType = AddPostActionType | UpdateNewPostTextActionType | SendMessageActionType | UpdateNewMessageBodyActionType
 
 
 
@@ -56,14 +76,15 @@ export const store: StoreType = {
             messages: [
                 {id: 1, message: "Hi"},
                 {id: 2, message: "Bye"}
-            ]
+            ],
+            newMessageBody: ''
         }
     },
     _callSubscriber() {
         console.log('state change')
     },
     dispatch(action) {
-        if(action.type === ADD_POST) {
+        if (action.type === ADD_POST) {
             let newPost: ProfileType = {
                 id: 5,
                 message: this._state.profilePage.newPostText,
@@ -74,6 +95,17 @@ export const store: StoreType = {
             this._callSubscriber()
         } else if (action.type === UPDATE_NEW_POST_TEXT) {
             this.getState().profilePage.newPostText = action.newText
+            this._callSubscriber()
+        } else if (action.type === SEND_MESSAGE) {
+            let mess: MessageType = {
+                id: 6,
+                message: this._state.dialogsPage.newMessageBody
+            }
+            this.getState().dialogsPage.messages.push(mess)
+            this.getState().dialogsPage.newMessageBody = ''
+            this._callSubscriber()
+        } else if (action.type === UPDATE_NEW_MESSAGE_BODY) {
+            this.getState().dialogsPage.newMessageBody = action.body
             this._callSubscriber()
         }
     },
@@ -86,5 +118,7 @@ export const store: StoreType = {
 }
 
 export const addPostActionCreator = (): AddPostActionType => ({type: ADD_POST})
-
 export const updateNewPostTextActionCreator = (newText: string): UpdateNewPostTextActionType => ({type: UPDATE_NEW_POST_TEXT, newText})
+export const sendMessageActionCreator = (): SendMessageActionType => ({type: SEND_MESSAGE})
+export const updateNewMessageBodyActionCreator = (body: string): UpdateNewMessageBodyActionType => ({type: UPDATE_NEW_MESSAGE_BODY, body})
+
