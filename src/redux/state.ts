@@ -1,5 +1,8 @@
 import {DialogType, MessageType} from "../components/Dialogs/Dialogs"
-import {ProfileType} from "../components/Profile/MyPosts/MyPosts";
+import {ProfileType} from "../components/Profile/MyPosts/MyPosts"
+const ADD_POST = 'ADD-POST'
+const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT'
+
 
 export type ProfilePageType = {
     posts: Array<ProfileType>
@@ -26,11 +29,11 @@ type AddPostActionType = {
     type: 'ADD-POST'
     //postText: string
 }
-type UpdateNewPostTextActopnType = {
+type UpdateNewPostTextActionType = {
     type : 'UPDATE-NEW-POST-TEXT'
     newText: string
 }
-export type ActionType = AddPostActionType | UpdateNewPostTextActopnType
+export type ActionType = AddPostActionType | UpdateNewPostTextActionType
 
 
 
@@ -60,7 +63,7 @@ const store: StoreType = {
         console.log('state change')
     },
     dispatch(action) {
-        if(action.type === 'ADD-POST') {
+        if(action.type === ADD_POST) {
             let newPost: ProfileType = {
                 id: 5,
                 message: this._state.profilePage.newPostText,
@@ -69,7 +72,7 @@ const store: StoreType = {
             this.getState().profilePage.posts.push(newPost)
             this.getState().profilePage.newPostText = ''
             this._callSubscriber()
-        } else if (action.type === 'UPDATE-NEW-POST-TEXT') {
+        } else if (action.type === UPDATE_NEW_POST_TEXT) {
             this.getState().profilePage.newPostText = action.newText
             this._callSubscriber()
         }
@@ -82,4 +85,6 @@ const store: StoreType = {
     }
 }
 
-export default store
+export const addPostActionCreator = (): AddPostActionType => ({type: ADD_POST})
+
+export const updateNewPostTextActionCreator = (newText: string): UpdateNewPostTextActionType => ({type: UPDATE_NEW_POST_TEXT, newText})
