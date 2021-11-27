@@ -4,7 +4,7 @@ import {MessageType, SendMessageActionType, UpdateNewMessageBodyActionType} from
 const SEND_MESSAGE = 'SEND_MESSAGE'
 const UPDATE_NEW_MESSAGE_BODY = 'UPDATE_NEW_MESSAGE_BODY'
 
-export const dialogsReducer = (state:any, action:any) => {
+export const dialogsReducer = (state: DialogPageType, action: ActionType) => {
 
 switch (action.type) {
     case SEND_MESSAGE:
