@@ -1,24 +1,30 @@
 import React from "react"
-import {ActionType, AddPostActionType, ProfileType, RootStateType, UpdateNewPostTextActionType} from "./state";
+import {
+    ActionType,
+    AddPostActionType,
+    ProfilePageType,
+    ProfileType,
+    UpdateNewPostTextActionType
+} from "./state";
 
 const ADD_POST = 'ADD_POST'
 const UPDATE_NEW_POST_TEXT = 'UPDATE_NEW_POST_TEXT'
 
 
-export const profileReducer = (state: RootStateType, action: ActionType) => {
+export const profileReducer = (state: ProfilePageType, action: ActionType) => {
     switch (action.type) {
         case ADD_POST:
             let newPost: ProfileType = {
                 id: 5,
-                message: state.profilePage.newPostText,
+                message: state.newPostText,
                 likeCount: 1
             }
-            state.profilePage.posts.push(newPost)
-            state.profilePage.newPostText = ''
+            state.posts.push(newPost)
+            state.newPostText = ''
             return state
 
         case UPDATE_NEW_POST_TEXT:
-            state.profilePage.newPostText = action.newText
+            state.newPostText = action.newText
             return state
 
         default:

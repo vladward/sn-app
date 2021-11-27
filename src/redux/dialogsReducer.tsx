@@ -1,5 +1,11 @@
 import React from "react"
-import {MessageType, SendMessageActionType, UpdateNewMessageBodyActionType} from "./state";
+import {
+    ActionType,
+    DialogPageType,
+    MessageType,
+    SendMessageActionType,
+    UpdateNewMessageBodyActionType
+} from "./state";
 
 const SEND_MESSAGE = 'SEND_MESSAGE'
 const UPDATE_NEW_MESSAGE_BODY = 'UPDATE_NEW_MESSAGE_BODY'
@@ -26,4 +32,7 @@ switch (action.type) {
 
 
 export const sendMessageActionCreator = (): SendMessageActionType => ({type: SEND_MESSAGE})
-export const updateNewMessageBodyActionCreator = (body: string): UpdateNewMessageBodyActionType => ({type: UPDATE_NEW_MESSAGE_BODY, body})
+export const updateNewMessageBodyActionCreator = (body: string): UpdateNewMessageBodyActionType => ({
+    type: UPDATE_NEW_MESSAGE_BODY,
+    body
+})
