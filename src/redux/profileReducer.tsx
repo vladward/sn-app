@@ -5,7 +5,7 @@ import {
     ProfilePageType,
     ProfileType,
     UpdateNewPostTextActionType
-} from "./state";
+} from "./store";
 
 const ADD_POST = 'ADD_POST'
 const UPDATE_NEW_POST_TEXT = 'UPDATE_NEW_POST_TEXT'

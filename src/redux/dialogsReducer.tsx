@@ -5,7 +5,7 @@ import {
     MessageType,
     SendMessageActionType,
     UpdateNewMessageBodyActionType
-} from "./state";
+} from "./store";
 
 const SEND_MESSAGE = 'SEND_MESSAGE'
 const UPDATE_NEW_MESSAGE_BODY = 'UPDATE_NEW_MESSAGE_BODY'
