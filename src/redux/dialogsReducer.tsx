@@ -1,7 +1,29 @@
 const SEND_MESSAGE = 'SEND_MESSAGE'
 const UPDATE_NEW_MESSAGE_BODY = 'UPDATE_NEW_MESSAGE_BODY'
 
-export const dialogsReducer = (state: DialogPageType, action: ActionType) => {
+export type SendMessageActionType = {
+    type: 'SEND_MESSAGE'
+}
+export type UpdateNewMessageBodyActionType = {
+    type: 'UPDATE_NEW_MESSAGE_BODY'
+    body: string
+}
+export type DialogsActionType = SendMessageActionType | UpdateNewMessageBodyActionType
+export type DialogsType = {
+    id: number
+    name: string
+    src: string
+}
+export type MessagesType = {
+    id: number
+    message: string
+}
+export type DialogsPageType = {
+    dialogs: DialogsType[],
+    messages: MessagesType[],
+    newMessageBody: string
+}
+export type DialogsInitialStateType = typeof dialogsInitialState
 
 switch (action.type) {
     case SEND_MESSAGE:
