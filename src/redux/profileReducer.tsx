@@ -1,12 +1,3 @@
-import React from "react"
-import {
-    ActionType,
-    AddPostActionType,
-    ProfilePageType,
-    ProfileType,
-    UpdateNewPostTextActionType
-} from "./store";
-
 const ADD_POST = 'ADD_POST'
 const UPDATE_NEW_POST_TEXT = 'UPDATE_NEW_POST_TEXT'
 
