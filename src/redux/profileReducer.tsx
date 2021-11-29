@@ -31,10 +31,11 @@ let profileInitialState: ProfilePageType = {
     newPostText: ''
 }
 
-export const profileReducer = (state: ProfilePageType, action: ActionType) => {
+
+export const profileReducer = (state: ProfileInitialStateType = profileInitialState, action: ProfileActionType): ProfileInitialStateType => {
     switch (action.type) {
         case ADD_POST:
-            let newPost: ProfileType = {
+            let newPost: PostsType = {
                 id: 5,
                 message: state.newPostText,
                 likeCount: 1
