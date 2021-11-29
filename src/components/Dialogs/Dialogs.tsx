@@ -2,52 +2,44 @@ import React, {ChangeEvent, KeyboardEvent} from "react"
 import DialogItem from "./DialogItem/DialogsItem"
 import s from "./Dialogs.module.css"
 import Message from "./Message/Message"
-import {
-    ActionType,
-    DialogType,
-    MessageType,
-} from "../../redux/store";
-import {sendMessageActionCreator, updateNewMessageBodyActionCreator} from "../../redux/dialogsReducer";
+import {DialogsContainerType} from "./DialogsContainer";
 
-export type DialogPropsType = {
-    dialogs: Array<DialogType>
-    messages: Array<MessageType>
-    newMessageBody: string
-    dispatch: (action: ActionType) => void
-}
 
-const Dialogs = (props: DialogPropsType) => {
-    const newMessageBody = props.newMessageBody
-    const onChangeMessage = (e: ChangeEvent<HTMLInputElement>) => {
+const Dialogs = (props: DialogsContainerType) => {
+    const newMessageBody = props.dialogsPage.newMessageBody
+    const onChangeMessageHandler = (e: ChangeEvent<HTMLInputElement>) => {
         let body = e.currentTarget.value
-        props.dispatch(updateNewMessageBodyActionCreator(body))
+        props.onChangeMessage(body)
     }
-    const sendMessageBody = () => {
-        props.dispatch(sendMessageActionCreator())
+    const sendMessageBodyHandler = () => {
+        props.sendMessageBody()
     }
-    const onEnterMessage = (e: KeyboardEvent<HTMLInputElement>) => {
+    const onEnterMessageHandler = (e: KeyboardEvent<HTMLInputElement>) => {
         if (e.key === 'Enter') {
-            sendMessageBody()
+            sendMessageBodyHandler()
         }
     }
+
+    let dialogs = props.dialogsPage.dialogs.map((d, i) => <DialogItem key={i} name={d.name} id={d.id} src={d.src}/>)
+    let messages = props.dialogsPage.messages.map((m, i) => <Message key={i} message={m.message} id={m.id}/>)
 
     return (
         <div className={s.dialogs}>
             <div className={s.dialogsItems}>
-                {props.dialogs.map((d, i) => <DialogItem key={i} name={d.name} id={d.id} src={d.src} />)}
+                {dialogs}
             </div>
             <div className={s.messages}>
-                {props.messages.map((m, i) => <Message key={i} message={m.message} id={m.id} />)}
+                {messages}
             </div>
             <div>
                 <div>
                     <input placeholder="Enter you message..."
                            value={newMessageBody}
-                           onKeyPress={onEnterMessage}
-                           onChange={onChangeMessage}/>
+                           onKeyPress={onEnterMessageHandler}
+                           onChange={onChangeMessageHandler}/>
                 </div>
                 <div>
-                    <button onClick={sendMessageBody}>Add</button>
+                    <button onClick={sendMessageBodyHandler}>Add</button>
                 </div>
             </div>
         </div>
