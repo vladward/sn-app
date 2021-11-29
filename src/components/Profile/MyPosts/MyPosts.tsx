@@ -1,22 +1,10 @@
 import React, {ChangeEvent} from "react"
 import s from "./MyPosts.module.css"
 import Post from "./Post/Post"
-import {ActionType} from "../../../redux/store";
-import {addPostActionCreator, updateNewPostTextActionCreator} from "../../../redux/profileReducer";
+import {MyPostsContainerType} from "./MyPostsContainer";
 
-export type ProfileType = {
-    id: number
-    message: string
-    likeCount: number
-}
-type MyPostsType = {
-    posts: Array<ProfileType>
-    newPostText: string
-    dispatch: (action: ActionType) => void
-}
-
-const MyPosts = (props: MyPostsType) => {
-    let postsElements = props.posts.map(p => <Post key={p.id} message={p.message} likeCount={p.likeCount} id={p.id}/>)
+const MyPosts = (props: MyPostsContainerType) => {
+    let postsElements = props.profilePage.posts?.map(p => <Post key={p.id} message={p.message} likeCount={p.likeCount} id={p.id}/>)
 
     const addPost = () => {
         props.dispatch(addPostActionCreator())
