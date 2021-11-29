@@ -26,22 +26,8 @@ const MyPosts = (props: MyPostsType) => {
         let newText = e.currentTarget.value
         props.dispatch(updateNewPostTextActionCreator(newText))
     }
-
-    return (
-        <div className={s.postsBlock}>
-            <h3>My Posts</h3>
-            <div>
-                <div>
-                    <textarea placeholder={'Text'} onChange={onPostChange} value={props.newPostText}/>
-                </div>
-                <div>
-                    <button onClick={addPost}>Add post</button>
-                </div>
-            </div>
-            <div className={s.posts}>
-                {postsElements}
-            </div>
-        </div>
-    )
 }
-export default MyPosts
+
+const MyPostsContainer = connect(mapStateToProps, mapDispatchToProps)(MyPosts)
+
+export default MyPostsContainer
