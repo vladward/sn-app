@@ -1,35 +1,31 @@
-import {profileReducer} from "./profileReducer";
-import {dialogsReducer} from "./dialogsReducer";
-
-
-export type MessageType = {
+type MessageType = {
     id: number
     message: string
 }
-export type DialogType = {
+type DialogType = {
     id: number
     name: string
     src: string
 }
-export type ProfileType = {
+type ProfileType = {
     id: number
     message: string
     likeCount: number
 }
-export type ProfilePageType = {
+type ProfilePageType = {
     posts: Array<ProfileType>
     newPostText: string
 }
-export type DialogPageType = {
+type DialogPageType = {
     dialogs: Array<DialogType>
     messages: Array<MessageType>
     newMessageBody: string
 }
-export type RootStateType = {
+type RootStateType = {
     profilePage: ProfilePageType
     dialogsPage: DialogPageType
 }
-export type StoreType = {
+type StoreType = {
     _state: RootStateType
     getState: () => RootStateType
     dispatch: (action: ActionType) => void
@@ -42,14 +38,14 @@ export type AddPostActionType = {
     //postText: string
 }
 export type UpdateNewPostTextActionType = {
-    type : 'UPDATE_NEW_POST_TEXT'
+    type: 'UPDATE_NEW_POST_TEXT'
     newText: string
 }
 export type SendMessageActionType = {
     type: 'SEND_MESSAGE'
 }
 export type UpdateNewMessageBodyActionType = {
-    type : 'UPDATE_NEW_MESSAGE_BODY'
+    type: 'UPDATE_NEW_MESSAGE_BODY'
     body: string
 }
 export type ActionType = AddPostActionType | UpdateNewPostTextActionType | SendMessageActionType | UpdateNewMessageBodyActionType
