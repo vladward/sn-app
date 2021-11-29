@@ -7,12 +7,12 @@ const MyPosts = (props: MyPostsContainerType) => {
     let postsElements = props.profilePage.posts?.map(p => <Post key={p.id} message={p.message} likeCount={p.likeCount} id={p.id}/>)
 
     const addPost = () => {
-        props.dispatch(addPostActionCreator())
+        props.addPost()
     }
 
-    const onPostChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+    const onPostChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
         let newText = e.currentTarget.value
-        props.dispatch(updateNewPostTextActionCreator(newText))
+        props.onPostChange(newText)
     }
 
     return (
@@ -20,7 +20,7 @@ const MyPosts = (props: MyPostsContainerType) => {
             <h3>My Posts</h3>
             <div>
                 <div>
-                    <textarea placeholder={'Text'} onChange={onPostChange} value={props.newPostText}/>
+                    <textarea placeholder={'Text'} onChange={onPostChangeHandler} value={props.profilePage.newPostText}/>
                 </div>
                 <div>
                     <button onClick={addPost}>Add post</button>
