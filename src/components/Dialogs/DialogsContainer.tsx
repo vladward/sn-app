@@ -28,27 +28,6 @@ const Dialogs = (props: DialogPropsType) => {
         }
     }
 
-    return (
-        <div className={s.dialogs}>
-            <div className={s.dialogsItems}>
-                {props.dialogs.map((d, i) => <DialogItem key={i} name={d.name} id={d.id} src={d.src} />)}
-            </div>
-            <div className={s.messages}>
-                {props.messages.map((m, i) => <Message key={i} message={m.message} id={m.id} />)}
-            </div>
-            <div>
-                <div>
-                    <input placeholder="Enter you message..."
-                           value={newMessageBody}
-                           onKeyPress={onEnterMessage}
-                           onChange={onChangeMessage}/>
-                </div>
-                <div>
-                    <button onClick={sendMessageBody}>Add</button>
-                </div>
-            </div>
-        </div>
-    )
-}
+const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(Dialogs)
 
-export default Dialogs
+export default DialogsContainer
