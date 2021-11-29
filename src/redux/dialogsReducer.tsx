@@ -57,17 +57,17 @@ export const dialogsReducer = (state: DialogsInitialStateType = dialogsInitialSt
             state.newMessageBody = ''
             return state
 
-    case UPDATE_NEW_MESSAGE_BODY:
-        state.newMessageBody = action.body
-        return state
-    default:
-        return state
+        case UPDATE_NEW_MESSAGE_BODY:
+            state.newMessageBody = action.body
+            return state
+        default:
+            return state
     }
 }
 
 
-export const sendMessageActionCreator = (): SendMessageActionType => ({type: SEND_MESSAGE})
+export const sendMessageActionCreator = (): SendMessageActionType => ({type: SEND_MESSAGE}) as const
 export const updateNewMessageBodyActionCreator = (body: string): UpdateNewMessageBodyActionType => ({
     type: UPDATE_NEW_MESSAGE_BODY,
     body
-})
+}) as const
