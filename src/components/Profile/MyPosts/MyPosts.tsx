@@ -7,7 +7,7 @@ const MyPosts = (props: MyPostsContainerType) => {
     let postsElements = props.profilePage.posts?.map(p => <Post key={p.id} message={p.message} likeCount={p.likeCount} id={p.id}/>)
 
     const addPost = () => {
-        props.addPost()
+        props.addPost(props.profilePage.newPostText)
     }
 
     const onPostChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {

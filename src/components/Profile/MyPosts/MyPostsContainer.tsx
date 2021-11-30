@@ -9,7 +9,7 @@ type MyPostsMapStateToPropsType = {
 }
 type MyPostsMapDispatchToPropsType = {
     onPostChange: (newText: string) => void
-    addPost: () => void
+    addPost: (text: string) => void
 }
 export type MyPostsContainerType = MyPostsMapStateToPropsType & MyPostsMapDispatchToPropsType
 
@@ -22,7 +22,7 @@ const mapStateToProps = (state: AppStateType): MyPostsMapStateToPropsType => {
 const mapDispatchToProps = (dispatch: Dispatch): MyPostsMapDispatchToPropsType => {
     return {
         onPostChange: (newText: string) => dispatch(updateNewPostTextActionCreator(newText)),
-        addPost: () => dispatch(addPostActionCreator())
+        addPost: (text: string) => dispatch(addPostActionCreator(text))
     }
 }
 
