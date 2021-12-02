@@ -13,6 +13,6 @@
     background-color: cornflowerblue;
 }
 
-.app-wrapper-content img {
+.app-wrapper-content .profileImage {
     width: 600px;
 }
