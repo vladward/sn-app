@@ -41,7 +41,7 @@ export const Users = (props: UsersContainerType) => {
         <div>
             {props.users.map(u => <div key={u.id}>
                 <span>
-                    <div>
+                    <div className={s.userPhotoContainer}>
                         <img src={u.photoUrl} alt="photo" className={s.userPhoto}/>
                     </div>
                     <div>
