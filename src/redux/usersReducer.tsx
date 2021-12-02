@@ -1,4 +1,3 @@
-import {v1} from "uuid"
 const FOLLOW = "FOLLOW"
 const UNFOLLOW = "UNFOLLOW"
 const SET_USERS = "SET_USERS"
@@ -20,13 +19,11 @@ type LocationType = {
 export type UsersInitialStateType = {
     users: UsersType[]
 }
-
 type UsersActionType = {
     type: string
     id: string
     users: any
 }
-
 type FollowACType = {
     type: "FOLLOW",
     id: string
@@ -39,7 +36,6 @@ type SetUsersACType = {
     type: "SET_USERS",
     users: any
 }
-
 
 export type ProfileInitialStateType = typeof UsersInitialState
 
