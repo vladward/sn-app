@@ -5,9 +5,9 @@ const SET_USERS = "SET_USERS"
 
 export type UsersType = {
     id: string
-    photoUrl: string
+    photos: string
     followed: boolean
-    fullName: string
+    name: string
     status: string
     location: LocationType
 }
