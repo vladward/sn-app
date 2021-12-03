@@ -8,12 +8,14 @@ export class Users extends React.Component<UsersContainerType> {
 
     constructor(props: UsersContainerType) {
         super(props)
+    }
 
-            axios.get("https://social-network.samuraijs.com/api/1.0/users")
-                .then(response => {
-                    this.props.setUsers(response.data.items)
-                    console.log(response)
-                })
+    componentDidMount() {
+        axios.get("https://social-network.samuraijs.com/api/1.0/users")
+            .then(response => {
+                this.props.setUsers(response.data.items)
+                console.log(response)
+            })
     }
 
     followHandler = (id: string) => {
@@ -33,7 +35,7 @@ export class Users extends React.Component<UsersContainerType> {
                     </div>
                     <div>
                         {u.followed
-                            ? <button onClick={() => this.UnFollowHandler(u.id)}>unFollow</button>
+                            ? <button onClick={() => this.UnFollowHandler(u.id)}>unfollow</button>
                             : <button onClick={() => this.followHandler(u.id)}>follow</button>
                         }
                     </div>
