@@ -18,6 +18,8 @@ type LocationType = {
 }
 export type UsersInitialStateType = {
     users: UsersType[]
+    pageSize: number
+    totalUsersCount: number
 }
 type UsersActionType = {
     type: string

@@ -5,7 +5,9 @@ import {AppStateType} from "../../redux/redux-store";
 import {followAC, setUsersAC, unFollowAC, UsersType} from "../../redux/usersReducer";
 
 export type UsersMapStateToPropsType = {
-    users: UsersType[]
+    users: UsersType[],
+    pageSize: number,
+    totalUsersCount: number
 }
 export type UsersMapDispatchToPropsType = {
     follow: (id: string) => void
