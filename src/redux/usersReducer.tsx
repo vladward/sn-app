@@ -20,6 +20,7 @@ export type UsersInitialStateType = {
     users: UsersType[]
     pageSize: number
     totalUsersCount: number
+    currentPage: number
 }
 type UsersActionType = {
     type: string
@@ -44,7 +45,8 @@ export type ProfileInitialStateType = typeof UsersInitialState
 const UsersInitialState: UsersInitialStateType = {
     users: [],
     pageSize: 5,
-    totalUsersCount: 0
+    totalUsersCount: 0,
+    currentPage: 1
 }
 
 export const usersReducer = (state: ProfileInitialStateType = UsersInitialState, action: UsersActionType): ProfileInitialStateType => {
