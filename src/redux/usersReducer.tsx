@@ -1,6 +1,7 @@
 const FOLLOW = "FOLLOW"
 const UNFOLLOW = "UNFOLLOW"
 const SET_USERS = "SET_USERS"
+const SET_CURRENT_PAGE = "SET_CURRENT_PAGE"
 
 
 export type UsersType = {
@@ -25,7 +26,8 @@ export type UsersInitialStateType = {
 type UsersActionType = {
     type: string
     id: string
-    users: any
+    users: UsersType[]
+    currentPage: number
 }
 type FollowACType = {
     type: "FOLLOW",
@@ -39,26 +41,33 @@ type SetUsersACType = {
     type: "SET_USERS",
     users: any
 }
-
+type SetCurrentPageACType = {
+    type: "SET_CURRENT_PAGE",
+    currentPage: number
+}
+type GeneralActionType = UsersActionType | FollowACType | UnFollowACType | SetUsersACType | SetCurrentPageACType
 export type ProfileInitialStateType = typeof UsersInitialState
 
 const UsersInitialState: UsersInitialStateType = {
     users: [],
     pageSize: 5,
-    totalUsersCount: 0,
+    totalUsersCount: 20,
     currentPage: 1
 }
 
-export const usersReducer = (state: ProfileInitialStateType = UsersInitialState, action: UsersActionType): ProfileInitialStateType => {
+export const usersReducer = (state: ProfileInitialStateType = UsersInitialState, action: GeneralActionType): ProfileInitialStateType => {
     switch (action.type) {
         case FOLLOW: {
-            return {...state, users: state.users.map( u => u.id === action.id ? {...u, followed: true} : u)}
+            return {...state, users: state.users.map(u => u.id === action.id ? {...u, followed: true} : u)}
         }
         case UNFOLLOW: {
-            return {...state, users: state.users.map( u => u.id === action.id ? {...u, followed: false} : u)}
+            return {...state, users: state.users.map(u => u.id === action.id ? {...u, followed: false} : u)}
         }
         case SET_USERS: {
-            return {...state, users: [...state.users, ...action.users]}
+            return {...state, users: action.users}
+        }
+        case SET_CURRENT_PAGE: {
+            return {...state, currentPage: action.currentPage}
         }
         default:
             return state
@@ -68,3 +77,4 @@ export const usersReducer = (state: ProfileInitialStateType = UsersInitialState,
 export const followAC = (id: string): FollowACType => ({type: FOLLOW, id})
 export const unFollowAC = (id: string): UnFollowACType => ({type: UNFOLLOW, id})
 export const setUsersAC = (users: any): SetUsersACType => ({type: SET_USERS, users})
+export const setCurrentPageAC = (currentPage: number): SetCurrentPageACType => ({type: SET_CURRENT_PAGE, currentPage})
