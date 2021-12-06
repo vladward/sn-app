@@ -35,6 +35,9 @@ export class Users extends React.Component<UsersContainerType> {
 
         return (
             <div>
+                <div>{pages.map((p, i) => {
+                    return <span key={i} className={this.props.currentPage === p ? s.currentPage : ''}>{p}</span>
+                })}</div>
                 {this.props.users.map(u => <div key={u.id}>
                 <span>
                     <div className={s.userPhotoContainer}>
