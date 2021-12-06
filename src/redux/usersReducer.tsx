@@ -40,7 +40,9 @@ type SetUsersACType = {
 export type ProfileInitialStateType = typeof UsersInitialState
 
 const UsersInitialState: UsersInitialStateType = {
-    users: []
+    users: [],
+    pageSize: 5,
+    totalUsersCount: 0
 }
 
 export const usersReducer = (state: ProfileInitialStateType = UsersInitialState, action: UsersActionType): ProfileInitialStateType => {

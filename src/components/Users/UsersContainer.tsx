@@ -18,7 +18,9 @@ export type UsersContainerType = UsersMapStateToPropsType & UsersMapDispatchToPr
 
 const mapStateToProps = (state: AppStateType): UsersMapStateToPropsType => {
     return {
-        users: state.usersPage.users
+        users: state.usersPage.users,
+        pageSize: state.usersPage.pageSize,
+        totalUsersCount: state.usersPage.totalUsersCount
     }
 }
 
