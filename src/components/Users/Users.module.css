@@ -10,3 +10,7 @@
     height: 100px;
     padding: 10px;
 }
+
+.currentPage {
+    font-weight: bold;
+}
