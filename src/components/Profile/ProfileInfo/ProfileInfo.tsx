@@ -2,7 +2,10 @@ import React from "react"
 import s from "./ProfileInfo.module.css"
 
 
-const ProfileInfo = (props:any) => {
+const ProfileInfo = (props: ProfileContainerType) => {
+    if (!props.profile) {
+        return <PreLoader/>
+    }
     return (
         <div>
             <div>
