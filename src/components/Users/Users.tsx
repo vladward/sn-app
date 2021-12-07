@@ -13,7 +13,7 @@ type UsersComponentType = {
     setCurrentPageHandler: (currentPage: number) => void
 }
 
-export const Users = (props:UsersComponentType) => {
+export const Users = (props: UsersComponentType) => {
 
     const followHandler = (id: string) => {
         props.follow(id)
@@ -22,22 +22,23 @@ export const Users = (props:UsersComponentType) => {
         props.unFollow(id)
     }
 
-        let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize)
-        let pages = []
-        for (let i = 1; i <= pagesCount; i++) {
-            pages.push(i)
-        }
+    let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize)
+    let pages = []
+    for (let i = 1; i <= pagesCount; i++) {
+        pages.push(i)
+    }
 
-        return (
-            <div>
-                <div>{pages.map((p, i) => {
-                        return <span key={i}
-                                     onClick={() => props.setCurrentPageHandler(p)}
-                                     className={props.currentPage === p ? s.currentPage : ''}
-                        >{p}</span>
-                    }
-                )}</div>
-                {props.users.map(u => <div key={u.id}>
+    return (
+        <div>
+            <div>{pages.map((p, i) => {
+                    return <span key={i}
+                                 style={{backgroundColor: "rosybrown", border: "1px solid black"}}
+                                 onClick={() => props.setCurrentPageHandler(p)}
+                                 className={props.currentPage === p ? s.currentPage : ''}
+                    >{p}</span>
+                }
+            )}</div>
+            {props.users.map(u => <div key={u.id}>
                     <span>
                     <div className={s.userPhotoContainer}>
                     <img src={u.photos[0] ? u.photos[0] : noPhoto} alt="photo" className={s.userPhoto}/>
@@ -49,11 +50,11 @@ export const Users = (props:UsersComponentType) => {
                 }
                     </div>
                     </span>
-                    <span>
+                <span>
                     <div>{u.name}</div>
                     <div>{u.status}</div>
                     </span>
-                </div>)}
-            </div>
-        )
+            </div>)}
+        </div>
+    )
 }
