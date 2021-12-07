@@ -11,6 +11,10 @@
     padding: 10px;
 }
 
+.userPhotoContainer img {
+    cursor: pointer;
+}
+
 .currentPage {
     font-weight: bold;
 }
