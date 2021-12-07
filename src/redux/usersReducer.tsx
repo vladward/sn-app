@@ -3,6 +3,7 @@ const UNFOLLOW = "UNFOLLOW"
 const SET_USERS = "SET_USERS"
 const SET_CURRENT_PAGE = "SET_CURRENT_PAGE"
 const SET_TOTAL_USERS_COUNT = "SET_TOTAL_USERS_COUNT"
+const TOGGLE_IS_FETCHING = "TOGGLE_IS_FETCHING"
 
 
 export type UsersType = {
@@ -23,6 +24,7 @@ export type UsersInitialStateType = {
     pageSize: number
     totalUsersCount: number
     currentPage: number
+    isFetching: boolean
 }
 type FollowACType = {
     type: "FOLLOW",
@@ -44,18 +46,24 @@ type setTotalUsersCountACType = {
     type: "SET_TOTAL_USERS_COUNT",
     totalCount: number
 }
+type setIsFetchingACType = {
+    type: "TOGGLE_IS_FETCHING",
+    isFetching: boolean
+}
 type GeneralActionType = FollowACType
     | UnFollowACType
     | SetUsersACType
     | SetCurrentPageACType
     | setTotalUsersCountACType
+    | setIsFetchingACType
 export type ProfileInitialStateType = typeof UsersInitialState
 
 const UsersInitialState: UsersInitialStateType = {
     users: [],
     pageSize: 5,
     totalUsersCount: 0,
-    currentPage: 1
+    currentPage: 1,
+    isFetching: false
 }
 
 export const usersReducer = (state: ProfileInitialStateType = UsersInitialState, action: GeneralActionType): ProfileInitialStateType => {
@@ -75,6 +83,9 @@ export const usersReducer = (state: ProfileInitialStateType = UsersInitialState,
         case SET_TOTAL_USERS_COUNT: {
             return {...state, totalUsersCount: action.totalCount}
         }
+        case TOGGLE_IS_FETCHING: {
+            return {...state, isFetching: action.isFetching}
+        }
         default:
             return state
     }
@@ -84,4 +95,8 @@ export const followAC = (id: string): FollowACType => ({type: FOLLOW, id})
 export const unFollowAC = (id: string): UnFollowACType => ({type: UNFOLLOW, id})
 export const setUsersAC = (users: any): SetUsersACType => ({type: SET_USERS, users})
 export const setCurrentPageAC = (currentPage: number): SetCurrentPageACType => ({type: SET_CURRENT_PAGE, currentPage})
-export const setTotalUsersCountAC = (totalCount: number): setTotalUsersCountACType => ({type: SET_TOTAL_USERS_COUNT, totalCount})
+export const setTotalUsersCountAC = (totalCount: number): setTotalUsersCountACType => ({
+    type: SET_TOTAL_USERS_COUNT,
+    totalCount
+})
+export const setIsFetchingAC = (isFetching: boolean): setIsFetchingACType => ({type: TOGGLE_IS_FETCHING, isFetching})
