@@ -1,5 +1,10 @@
 import React from "react"
 import Profile from "./Profile";
+import axios from "axios";
+import {connect} from "react-redux";
+import {AppStateType} from "../../redux/redux-store";
+import {setUserProfileAC} from "../../redux/profileReducer";
+import {RouteComponentProps, withRouter} from "react-router-dom";
 
 type ProfileMapStateToPropsType = {
     profile: ProfileType
@@ -35,7 +40,10 @@ export type ProfileType = {
     photos: PhotosType
 }
 
-export class ProfileContainer extends React.Component<ProfileContainerType>{
+export type ProfileContainerType = RouteComponentProps<PathParamsType> & ProfileConnectPropsType
+export type ProfileConnectPropsType = ProfileMapStateToPropsType & ProfileMapDispatchToPropsType
+
+class ProfileContainer extends React.Component<ProfileContainerType> {
 
     componentDidMount() {
         let userId = this.props.match.params.userId
@@ -51,8 +59,18 @@ export class ProfileContainer extends React.Component<ProfileContainerType>{
     render() {
         return (
             <div>
-                <Profile {...this.props}/>
+                <Profile {...this.props} profile={this.props.profile}/>
             </div>
         )
     }
 }
+
+const mapStateToProps = (state: AppStateType): ProfileMapStateToPropsType => {
+    return {
+        profile: state.profilePage.profile
+    }
+}
+
+let withUrlDataContainerComponent = withRouter(ProfileContainer)
+
+export default connect(mapStateToProps, {setUserProfile: setUserProfileAC})(withUrlDataContainerComponent)
