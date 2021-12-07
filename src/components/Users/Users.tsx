@@ -3,9 +3,15 @@ import noPhoto from './../../assets/noPhoto.jpg'
 import React from "react";
 import {UsersType} from "../../redux/usersReducer";
 
-    constructor(props: UsersContainerType) {
-        super(props)
-    }
+type UsersComponentType = {
+    users: UsersType[]
+    pageSize: number
+    totalUsersCount: number
+    currentPage: number
+    follow: (id: string) => void
+    unFollow: (id: string) => void
+    setCurrentPageHandler: (currentPage: number) => void
+}
 
 export const Users = (props:UsersComponentType) => {
 
