@@ -5,3 +5,11 @@
 .header img {
     width: 20px;
 }
+
+.loginContainer {
+    float: right;
+}
+
+.loginContainer a {
+    color: white;
+}
