@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/sn-app/static/css/main.aa3ce659.chunk.css",
+    "main.js": "/sn-app/static/js/main.7b90def3.chunk.js",
+    "main.js.map": "/sn-app/static/js/main.7b90def3.chunk.js.map",
+    "runtime-main.js": "/sn-app/static/js/runtime-main.dd1f5182.js",
+    "runtime-main.js.map": "/sn-app/static/js/runtime-main.dd1f5182.js.map",
+    "static/js/2.eefc6fca.chunk.js": "/sn-app/static/js/2.eefc6fca.chunk.js",
+    "static/js/2.eefc6fca.chunk.js.map": "/sn-app/static/js/2.eefc6fca.chunk.js.map",
+    "static/js/3.54f10d61.chunk.js": "/sn-app/static/js/3.54f10d61.chunk.js",
+    "static/js/3.54f10d61.chunk.js.map": "/sn-app/static/js/3.54f10d61.chunk.js.map",
+    "index.html": "/sn-app/index.html",
+    "static/css/main.aa3ce659.chunk.css.map": "/sn-app/static/css/main.aa3ce659.chunk.css.map",
+    "static/js/2.eefc6fca.chunk.js.LICENSE.txt": "/sn-app/static/js/2.eefc6fca.chunk.js.LICENSE.txt",
+    "static/media/loader.335d9847.svg": "/sn-app/static/media/loader.335d9847.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.dd1f5182.js",
+    "static/js/2.eefc6fca.chunk.js",
+    "static/css/main.aa3ce659.chunk.css",
+    "static/js/main.7b90def3.chunk.js"
+  ]
+}
