@@ -6,8 +6,8 @@ import {ProfileContainerType} from "./ProfileContainer";
 const Profile = (props: ProfileContainerType) => {
     return (
         <div>
-            <ProfileInfo {...props} profile={props.profile} setUserProfile={props.setUserProfile} />
-            <MyPostsContainer />
+            <ProfileInfo {...props} profile={props.profile}/>
+            <MyPostsContainer/>
         </div>
     )
 }
