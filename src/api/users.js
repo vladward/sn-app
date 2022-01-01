@@ -1,12 +1,4 @@
-import axios from "axios"
-
-const instance = axios.create({
-    baseURL: 'https://social-network.samuraijs.com/api/1.0/',
-    withCredentials: true,
-    headers: {
-        'API-KEY': 'd2b9a4d9-cefb-4fec-a892-1707fa6823da'
-    }
-})
+import {instance} from "./instance";
 
 export const getUsers = (currentPage = 1, pageSize = 10) => {
     return instance.get(`users?page=${currentPage}&count=${pageSize}`).then(res => res.data)
