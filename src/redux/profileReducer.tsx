@@ -1,4 +1,7 @@
 import {v1} from "uuid";
+import {Dispatch} from "redux";
+import {ProfileType} from "../components/Profile/ProfileContainer";
+import {getProfile} from "../api/profile";
 
 const ADD_POST = 'ADD_POST'
 const UPDATE_NEW_POST_TEXT = 'UPDATE_NEW_POST_TEXT'
@@ -67,7 +70,14 @@ export const updateNewPostTextActionCreator = (newText: string): UpdateNewPostTe
     type: UPDATE_NEW_POST_TEXT,
     newText
 }) as const
-export const setUserProfileAC = (profile: any): SetUserProfileActionType => ({
+export const setUserProfileAC = (profile: ProfileType): SetUserProfileActionType => ({
     type: SET_USER_PROFILE,
     profile
 }) as const
+
+export const getUserProfileTC = (id: string) => (dispatch: Dispatch) => {
+    getProfile(id)
+        .then(response => {
+            dispatch(setUserProfileAC(response.data))
+        })
+}
