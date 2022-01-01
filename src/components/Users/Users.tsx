@@ -2,8 +2,8 @@ import s from './Users.module.css'
 import noPhoto from './../../assets/noPhoto.jpg'
 import React from "react";
 import {UsersType} from "../../redux/usersReducer";
-import { NavLink } from 'react-router-dom';
-import axios from "axios";
+import {NavLink} from 'react-router-dom';
+import {followUser, unfollowUser} from "../../api/users";
 
 type UsersComponentType = {
     users: UsersType[]
@@ -50,31 +50,19 @@ export const Users = (props: UsersComponentType) => {
                     <div>
                 {u.followed
                     ? <button onClick={() => {
-                        axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {
-                            withCredentials: true,
-                            headers: {
-                                'API-KEY': 'd2b9a4d9-cefb-4fec-a892-1707fa6823da'
+                        unfollowUser(u.id).then(response => {
+                            if (response.resultCode === 0) {
+                                UnFollowHandler(u.id)
                             }
                         })
-                            .then(response => {
-                                if (response.data.resultCode === 0) {
-                                    UnFollowHandler(u.id)
-                                }
-                            })
                     }
                     }>unfollow</button>
                     : <button onClick={() => {
-                        axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {}, {
-                            withCredentials: true,
-                            headers: {
-                                'API-KEY': 'd2b9a4d9-cefb-4fec-a892-1707fa6823da'
+                        followUser(u.id).then(response => {
+                            if (response.resultCode === 0) {
+                                followHandler(u.id)
                             }
                         })
-                            .then(response => {
-                                if (response.data.resultCode === 0) {
-                                    followHandler(u.id)
-                                }
-                            })
                     }
                     }>follow</button>
                 }
