@@ -1,3 +1,7 @@
+//constants
+import {Dispatch} from "redux";
+import {followUser, getUsers, unfollowUser} from "../api/users";
+
 const FOLLOW = "FOLLOW"
 const UNFOLLOW = "UNFOLLOW"
 const SET_USERS = "SET_USERS"
@@ -6,7 +10,7 @@ const SET_TOTAL_USERS_COUNT = "SET_TOTAL_USERS_COUNT"
 const TOGGLE_IS_FETCHING = "TOGGLE_IS_FETCHING"
 const FOLLOWING_IS_PROGRESS = "FOLLOWING_IS_PROGRESS"
 
-
+//types
 export type UsersType = {
     id: string
     photos: string
@@ -15,7 +19,6 @@ export type UsersType = {
     status: string
     location: LocationType
 }
-
 type LocationType = {
     city: string
     country: string,
@@ -75,6 +78,7 @@ const UsersInitialState: UsersInitialStateType = {
     followingInProgress: []
 }
 
+//reducer
 export const usersReducer = (state: ProfileInitialStateType = UsersInitialState, action: GeneralActionType): ProfileInitialStateType => {
     switch (action.type) {
         case FOLLOW: {
@@ -108,6 +112,7 @@ export const usersReducer = (state: ProfileInitialStateType = UsersInitialState,
     }
 }
 
+//action creators
 export const followAC = (id: string): FollowACType => ({type: FOLLOW, id}) as const
 export const unFollowAC = (id: string): UnFollowACType => ({type: UNFOLLOW, id}) as const
 export const setUsersAC = (users: any): SetUsersACType => ({type: SET_USERS, users}) as const
@@ -128,3 +133,42 @@ export const setFollowingInProgressAC = (isFetching: boolean, userId: string): s
     isFetching,
     userId
 }) as const
+
+//thunk creators
+export const getUsersTC = (currentPage: number, pageSize: number) => {
+    return (dispatch: Dispatch) => {
+        dispatch(setIsFetchingAC(true))
+        getUsers(currentPage, pageSize)
+            .then(res => {
+                dispatch(setIsFetchingAC(false))
+                dispatch(setUsersAC(res.items))
+                dispatch(setTotalUsersCountAC(res.totalCount))
+            })
+    }
+}
+
+export const unFollowTC = (id: string) => {
+    return (dispatch: Dispatch) => {
+        dispatch(setFollowingInProgressAC(true, id))
+        unfollowUser(id)
+            .then(response => {
+                if (response.resultCode === 0) {
+                    dispatch(unFollowAC(id))
+                }
+                dispatch(setFollowingInProgressAC(false, id))
+            })
+    }
+}
+
+export const followTC = (id: string) => {
+    return (dispatch: Dispatch) => {
+        dispatch(setFollowingInProgressAC(true, id))
+        followUser(id)
+            .then(response => {
+                if (response.resultCode === 0) {
+                    dispatch(followAC(id))
+                }
+                dispatch(setFollowingInProgressAC(false, id))
+            })
+    }
+}
