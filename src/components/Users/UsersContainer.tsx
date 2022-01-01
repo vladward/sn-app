@@ -10,9 +10,9 @@ import {
     UsersType
 } from "../../redux/usersReducer";
 import React from "react";
-import axios from "axios";
 import {Users} from "./Users";
 import PreLoader from "../PreLoader/PreLoader";
+import {getUsers} from "../../api/users";
 
 export type UsersMapStateToPropsType = {
     users: UsersType[],
@@ -36,28 +36,20 @@ class UsersContainer extends React.Component<UsersContainerType> {
 
     componentDidMount() {
         this.props.setIsFetching(true)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`, {
-            withCredentials: true,
+        getUsers(this.props.currentPage, this.props.pageSize).then(res => {
+            this.props.setIsFetching(false)
+            this.props.setUsers(res.items)
+            this.props.setTotalUsersCount(res.totalCount)
         })
-            .then(response => {
-                this.props.setIsFetching(false)
-                this.props.setUsers(response.data.items)
-                this.props.setTotalUsersCount(response.data.totalCount)
-                console.log(response)
-            })
     }
 
 
     setCurrentPageHandler = (page: number) => {
         this.props.setIsFetching(true)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${page}&count=${this.props.pageSize}`, {
-            withCredentials: true,
+        getUsers(page, this.props.pageSize).then(res => {
+            this.props.setIsFetching(false)
+            this.props.setUsers(res.items)
         })
-            .then(response => {
-                this.props.setIsFetching(false)
-                this.props.setUsers(response.data.items)
-                console.log(response)
-            })
         this.props.setCurrentPage(page)
     }
 
