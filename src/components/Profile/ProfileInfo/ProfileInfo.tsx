@@ -18,7 +18,7 @@ const ProfileInfo = (props: ProfileContainerType) => {
             {props.profile ? <div className={s.descriptionBlock}>
                 <img src={props.profile.photos.large ? props.profile.photos.large : noPhoto} alt="userImg"/>
             </div> : null}
-            <ProfileStatus status="Hi how"/>
+            <ProfileStatus status={props.status} updateUserStatusTC={props.updateUserStatusTC}/>
         </div>
     )
 }
