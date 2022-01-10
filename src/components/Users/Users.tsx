@@ -38,7 +38,7 @@ export const Users = (props: UsersComponentType) => {
                     <span>
                     <div className={s.userPhotoContainer}>
                         <NavLink to={`/profile/${u.id}`}>
-                        <img src={u.photos[0] ? u.photos[0] : noPhoto} alt="photo" className={s.userPhoto}/>
+                        <img src={u.photos[0] ? u.photos[0] : noPhoto} alt="img" className={s.userPhoto}/>
                         </NavLink>
                     </div>
                     <div>

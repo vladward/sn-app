@@ -12,10 +12,10 @@ const ProfileInfo = (props: ProfileContainerType) => {
     return (
         <div>
             <div>
-                <img className={s.profileImage} src="https://tinypng.com/images/social/website.jpg" alt=""/>
+                <img className={s.profileImage} src="https://tinypng.com/images/social/website.jpg" alt="profImg"/>
             </div>
             {props.profile ? <div className={s.descriptionBlock}>
-                <img src={props.profile.photos.large ? props.profile.photos.large : noPhoto}/>
+                <img src={props.profile.photos.large ? props.profile.photos.large : noPhoto} alt="userImg"/>
             </div> : null}
         </div>
     )
