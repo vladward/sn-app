@@ -3,6 +3,7 @@ import s from "./ProfileInfo.module.css"
 import PreLoader from "../../PreLoader/PreLoader";
 import noPhoto from '../../../assets/noPhoto.jpg'
 import {ProfileContainerType} from "../ProfileContainer";
+import {ProfileStatus} from "./ProfileStatus/ProfileStatus";
 
 
 const ProfileInfo = (props: ProfileContainerType) => {
@@ -17,6 +18,7 @@ const ProfileInfo = (props: ProfileContainerType) => {
             {props.profile ? <div className={s.descriptionBlock}>
                 <img src={props.profile.photos.large ? props.profile.photos.large : noPhoto} alt="userImg"/>
             </div> : null}
+            <ProfileStatus status="Hi how"/>
         </div>
     )
 }
