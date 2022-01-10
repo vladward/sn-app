@@ -12,6 +12,7 @@ export type UsersMapStateToPropsType = {
     currentPage: number,
     isFetching: boolean,
     followingInProgress: string[]
+    isAuth: boolean
 }
 export type UsersMapDispatchToPropsType = {
     setCurrentPage: (currentPage: number) => void
@@ -48,6 +49,7 @@ class UsersContainer extends React.Component<UsersContainerType> {
                              setCurrentPageHandler={this.setCurrentPageHandler}
                              followTC={this.props.followTC}
                              unFollowTC={this.props.unFollowTC}
+                             isAuth={this.props.isAuth}
                     />}
             </>
         )
@@ -63,6 +65,7 @@ const mapStateToProps = (state: AppStateType): UsersMapStateToPropsType => {
         currentPage: state.usersPage.currentPage,
         isFetching: state.usersPage.isFetching,
         followingInProgress: state.usersPage.followingInProgress,
+        isAuth: state.auth.isAuth
     }
 }
 
