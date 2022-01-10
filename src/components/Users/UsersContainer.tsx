@@ -4,6 +4,9 @@ import {followTC, getUsersTC, setCurrentPageAC, unFollowTC, UsersType} from "../
 import React from "react";
 import {Users} from "./Users";
 import PreLoader from "../PreLoader/PreLoader";
+import {withRouter} from "react-router-dom";
+import {WithAuthRedirectComponent} from "../../HOC/WithAuthRedirect";
+import {compose} from "redux";
 
 export type UsersMapStateToPropsType = {
     users: UsersType[],
@@ -12,7 +15,6 @@ export type UsersMapStateToPropsType = {
     currentPage: number,
     isFetching: boolean,
     followingInProgress: string[]
-    isAuth: boolean
 }
 export type UsersMapDispatchToPropsType = {
     setCurrentPage: (currentPage: number) => void
@@ -49,7 +51,6 @@ class UsersContainer extends React.Component<UsersContainerType> {
                              setCurrentPageHandler={this.setCurrentPageHandler}
                              followTC={this.props.followTC}
                              unFollowTC={this.props.unFollowTC}
-                             isAuth={this.props.isAuth}
                     />}
             </>
         )
@@ -57,7 +58,6 @@ class UsersContainer extends React.Component<UsersContainerType> {
 }
 
 const mapStateToProps = (state: AppStateType): UsersMapStateToPropsType => {
-
     return {
         users: state.usersPage.users,
         pageSize: state.usersPage.pageSize,
@@ -65,15 +65,17 @@ const mapStateToProps = (state: AppStateType): UsersMapStateToPropsType => {
         currentPage: state.usersPage.currentPage,
         isFetching: state.usersPage.isFetching,
         followingInProgress: state.usersPage.followingInProgress,
-        isAuth: state.auth.isAuth
     }
 }
 
-
-export default connect(mapStateToProps, {
-    setCurrentPage: setCurrentPageAC,
-    getUsers: getUsersTC,
-    followTC,
-    unFollowTC
-})(UsersContainer)
+export default compose<React.ComponentType>(
+    connect(mapStateToProps, {
+        setCurrentPage: setCurrentPageAC,
+        getUsers: getUsersTC,
+        followTC,
+        unFollowTC
+    }),
+    withRouter,
+    WithAuthRedirectComponent,
+)(UsersContainer)
 
