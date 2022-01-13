@@ -26,7 +26,7 @@ export const LoginForm: React.FC<InjectedFormProps<LoginFormDataType>> = (props)
                     <Field placeholder="Login" name="login" component="input"/>
                 </div>
                 <div>
-                    <Field placeholder="Password" name="password" component="input"/>
+                    <Field placeholder="Password" name="password" component="input" type="password"/>
                 </div>
                 <div>
                     <Field type="checkbox" name="rememberMe" component="input"/>
