@@ -4,17 +4,12 @@ import {ProfileType} from "../components/Profile/ProfileContainer";
 import {getProfile, getStatus, updateStatus} from "../api/profile";
 
 const ADD_POST = 'ADD_POST'
-const UPDATE_NEW_POST_TEXT = 'UPDATE_NEW_POST_TEXT'
 const SET_USER_PROFILE = 'SET_USER_PROFILE'
 const SET_USER_STATUS = 'SET_USER_STATUS'
 
 export type AddPostActionType = {
     type: 'ADD_POST'
     text: string
-}
-export type UpdateNewPostTextActionType = {
-    type: 'UPDATE_NEW_POST_TEXT'
-    newText: string
 }
 export type SetUserProfileActionType = {
     type: 'SET_USER_PROFILE'
@@ -25,11 +20,10 @@ export type SetUserStatusActionType = {
     status: string
 }
 
-export type ProfileActionType = AddPostActionType | UpdateNewPostTextActionType | SetUserProfileActionType | SetUserStatusActionType
+export type ProfileActionType = AddPostActionType | SetUserProfileActionType | SetUserStatusActionType
 
 export type ProfilePageType = {
     posts: PostsType[]
-    newPostText: string
     profile: any
     status: string
 }
@@ -46,7 +40,6 @@ let profileInitialState: ProfilePageType = {
         {id: v1(), message: "Yes no problem", likeCount: 6},
         {id: v1(), message: "Ok, let's go", likeCount: 8},
     ],
-    newPostText: '',
     profile: null,
     status: '',
 }
@@ -58,11 +51,7 @@ export const profileReducer = (state: ProfileInitialStateType = profileInitialSt
             return {
                 ...state,
                 posts: [...state.posts, {id: v1(), message: action.text, likeCount: 1}],
-                newPostText: ''
             }
-        }
-        case UPDATE_NEW_POST_TEXT: {
-            return {...state, newPostText: action.newText}
         }
         case SET_USER_PROFILE: {
             return {...state, profile: action.profile}
@@ -76,10 +65,6 @@ export const profileReducer = (state: ProfileInitialStateType = profileInitialSt
 }
 
 export const addPostActionCreator = (text: string): AddPostActionType => ({type: ADD_POST, text}) as const
-export const updateNewPostTextActionCreator = (newText: string): UpdateNewPostTextActionType => ({
-    type: UPDATE_NEW_POST_TEXT,
-    newText
-}) as const
 export const setUserProfileAC = (profile: ProfileType): SetUserProfileActionType => ({
     type: SET_USER_PROFILE,
     profile
