@@ -5,6 +5,7 @@ import s from "./Header.module.css"
 export type HeaderPropsType = {
     isAuth: boolean
     login: string
+    logout: () => void
 }
 
 export const Header = (props: HeaderPropsType) => {
@@ -15,7 +16,9 @@ export const Header = (props: HeaderPropsType) => {
                 alt=""/>
             <div className={s.loginContainer}>
                 {props.isAuth
-                    ? props.login
+                    ? <div>{props.login}
+                        <button onClick={props.logout}>Log out</button>
+                        </div>
                     : <NavLink to={'/login'}>Login</NavLink>
                 }
             </div>
