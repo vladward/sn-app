@@ -7,3 +7,9 @@
     background-color: #b03b34;
     color: white;
 }
+
+.formSummaryError {
+    border: #b03b34 solid 1px;
+    padding: 5px;
+    color: #b03b34;
+}
