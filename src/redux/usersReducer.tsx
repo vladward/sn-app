@@ -1,6 +1,6 @@
 //constants
-import {Dispatch} from "redux";
 import {followUser, getUsers, unfollowUser} from "../api/users";
+import {ThunkType} from "./redux-store";
 
 const FOLLOW = "FOLLOW"
 const UNFOLLOW = "UNFOLLOW"
@@ -60,7 +60,7 @@ type setFollowingInProgressACType = {
     isFetching: boolean,
     userId: string
 }
-type GeneralActionType = FollowACType
+export type UsersGeneralActionType = FollowACType
     | UnFollowACType
     | SetUsersACType
     | SetCurrentPageACType
@@ -79,7 +79,7 @@ const UsersInitialState: UsersInitialStateType = {
 }
 
 //reducer
-export const usersReducer = (state: ProfileInitialStateType = UsersInitialState, action: GeneralActionType): ProfileInitialStateType => {
+export const usersReducer = (state: ProfileInitialStateType = UsersInitialState, action: UsersGeneralActionType): ProfileInitialStateType => {
     switch (action.type) {
         case FOLLOW: {
             return {...state, users: state.users.map(u => u.id === action.id ? {...u, followed: true} : u)}
@@ -135,8 +135,8 @@ export const setFollowingInProgressAC = (isFetching: boolean, userId: string): s
 }) as const
 
 //thunk creators
-export const getUsersTC = (currentPage: number, pageSize: number) => {
-    return (dispatch: Dispatch) => {
+export const getUsersTC = (currentPage: number, pageSize: number): ThunkType => {
+    return (dispatch) => {
         dispatch(setIsFetchingAC(true))
         getUsers(currentPage, pageSize)
             .then(res => {
@@ -147,8 +147,8 @@ export const getUsersTC = (currentPage: number, pageSize: number) => {
     }
 }
 
-export const unFollowTC = (id: string) => {
-    return (dispatch: Dispatch) => {
+export const unFollowTC = (id: string): ThunkType => {
+    return (dispatch) => {
         dispatch(setFollowingInProgressAC(true, id))
         unfollowUser(id)
             .then(response => {
@@ -160,8 +160,8 @@ export const unFollowTC = (id: string) => {
     }
 }
 
-export const followTC = (id: string) => {
-    return (dispatch: Dispatch) => {
+export const followTC = (id: string): ThunkType => {
+    return (dispatch) => {
         dispatch(setFollowingInProgressAC(true, id))
         followUser(id)
             .then(response => {
