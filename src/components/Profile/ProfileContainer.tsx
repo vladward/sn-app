@@ -9,6 +9,8 @@ import {compose} from "redux";
 type ProfileMapStateToPropsType = {
     profile: ProfileType
     status: string
+    authUserId: string
+    isAuth: boolean
 }
 type ProfileMapDispatchToPropsType = {
     getUserProfileTC: (id: string) => void
@@ -49,7 +51,7 @@ class ProfileContainer extends React.Component<ProfileContainerType> {
     componentDidMount() {
         let userId = this.props.match.params.userId
         if (!userId) {
-            userId = "16442"
+            userId = this.props.authUserId
         }
         this.props.getUserProfileTC(userId)
         this.props.getUserStatusTC(userId)
@@ -70,7 +72,9 @@ class ProfileContainer extends React.Component<ProfileContainerType> {
 const mapStateToProps = (state: AppStateType): ProfileMapStateToPropsType => {
     return {
         profile: state.profilePage.profile,
-        status: state.profilePage.status
+        status: state.profilePage.status,
+        authUserId: state.auth.userId,
+        isAuth: state.auth.isAuth,
     }
 }
 

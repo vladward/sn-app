@@ -5,7 +5,7 @@ import {FormAction, stopSubmit} from "redux-form";
 const SET_USER_DATA = "SET_USER_DATA"
 
 export type UsersInitialStateType = {
-    userId: null,
+    userId: '',
     email: null,
     login: null,
     isAuth: boolean,
@@ -21,7 +21,7 @@ export type AuthGeneralActionType = SetUserDataActionType | FormAction
 export type ProfileInitialStateType = typeof UsersInitialState
 
 const UsersInitialState: UsersInitialStateType = {
-    userId: null,
+    userId: '',
     email: null,
     login: null,
     isAuth: false,
@@ -40,7 +40,7 @@ export const authReducer = (state: ProfileInitialStateType = UsersInitialState, 
     }
 }
 
-export const setUserDataAC = (userId: null, email: null, login: null, isAuth: boolean): SetUserDataActionType => ({
+export const setUserDataAC = (userId: '', email: null, login: null, isAuth: boolean): SetUserDataActionType => ({
     type: SET_USER_DATA, payload: {userId, email, login, isAuth}
 }) as const
 
@@ -71,7 +71,7 @@ export const logoutTC = (): ThunkType => (dispatch) => {
     logout()
         .then(response => {
             if (response.data.resultCode === 0) {
-                dispatch(setUserDataAC(null, null, null, false))
+                dispatch(setUserDataAC('', null, null, false))
             }
         })
 }
