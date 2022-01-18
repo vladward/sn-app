@@ -45,7 +45,7 @@ export const setUserDataAC = (userId: '', email: null, login: null, isAuth: bool
 }) as const
 
 export const getAuthUserDataTC = (): ThunkType => (dispatch) => {
-    authMe()
+    return authMe()
         .then(response => {
             if (response.data.resultCode === 0) {
                 let {id, email, login} = response.data.data
