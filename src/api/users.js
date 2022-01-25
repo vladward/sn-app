@@ -1,6 +1,6 @@
 import {instance} from "./instance";
 
-export const getUsers = (currentPage = 1, pageSize = 10) => {
+export const getAllUsers = (currentPage = 1, pageSize = 10) => {
     return instance.get(`users?page=${currentPage}&count=${pageSize}`).then(res => res.data)
 }
 

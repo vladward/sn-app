@@ -5,8 +5,15 @@ import React from "react";
 import {Users} from "./Users";
 import PreLoader from "../PreLoader/PreLoader";
 import {withRouter} from "react-router-dom";
-import {WithAuthRedirectComponent} from "../../HOC/WithAuthRedirect";
 import {compose} from "redux";
+import {
+    getCurrentPage,
+    getFollowingInProgress,
+    getIsFetching,
+    getPageSize,
+    getTotalUsersCount,
+    getUserSuper
+} from "../../redux/selectors/users-selector/users-selector";
 
 export type UsersMapStateToPropsType = {
     users: UsersType[],
@@ -18,7 +25,7 @@ export type UsersMapStateToPropsType = {
 }
 export type UsersMapDispatchToPropsType = {
     setCurrentPage: (currentPage: number) => void
-    getUsers: (currentPage: number, pageSize: number) => void
+    getUsersTC: (currentPage: number, pageSize: number) => void
     followTC: (id: string) => void
     unFollowTC: (id: string) => void
 }
@@ -28,12 +35,12 @@ export type UsersContainerType = UsersMapStateToPropsType & UsersMapDispatchToPr
 class UsersContainer extends React.Component<UsersContainerType> {
 
     componentDidMount() {
-        this.props.getUsers(this.props.currentPage, this.props.pageSize)
+        this.props.getUsersTC(this.props.currentPage, this.props.pageSize)
     }
 
 
     setCurrentPageHandler = (page: number) => {
-        this.props.getUsers(page, this.props.pageSize)
+        this.props.getUsersTC(page, this.props.pageSize)
     }
 
     render() {
@@ -59,23 +66,22 @@ class UsersContainer extends React.Component<UsersContainerType> {
 
 const mapStateToProps = (state: AppStateType): UsersMapStateToPropsType => {
     return {
-        users: state.usersPage.users,
-        pageSize: state.usersPage.pageSize,
-        totalUsersCount: state.usersPage.totalUsersCount,
-        currentPage: state.usersPage.currentPage,
-        isFetching: state.usersPage.isFetching,
-        followingInProgress: state.usersPage.followingInProgress,
+        users: getUserSuper(state),
+        pageSize: getPageSize(state),
+        totalUsersCount: getTotalUsersCount(state),
+        currentPage: getCurrentPage(state),
+        isFetching: getIsFetching(state),
+        followingInProgress: getFollowingInProgress(state),
     }
 }
 
 export default compose<React.ComponentType>(
     connect(mapStateToProps, {
         setCurrentPage: setCurrentPageAC,
-        getUsers: getUsersTC,
+        getUsersTC: getUsersTC,
         followTC,
         unFollowTC
     }),
     withRouter,
-    WithAuthRedirectComponent,
 )(UsersContainer)
 
