@@ -1,5 +1,5 @@
 //constants
-import {followUser, getUsers, unfollowUser} from "../api/users";
+import {followUser, getAllUsers, unfollowUser} from "../api/users";
 import {ThunkType} from "./redux-store";
 
 const FOLLOW = "FOLLOW"
@@ -138,7 +138,8 @@ export const setFollowingInProgressAC = (isFetching: boolean, userId: string): s
 export const getUsersTC = (currentPage: number, pageSize: number): ThunkType => {
     return (dispatch) => {
         dispatch(setIsFetchingAC(true))
-        getUsers(currentPage, pageSize)
+        dispatch(setCurrentPageAC(currentPage))
+        getAllUsers(currentPage, pageSize)
             .then(res => {
                 dispatch(setIsFetchingAC(false))
                 dispatch(setUsersAC(res.items))
