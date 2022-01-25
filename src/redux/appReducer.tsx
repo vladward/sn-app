@@ -1,6 +1,5 @@
-import {authMe, login, logout} from "../api/auth";
 import {ThunkType} from "./redux-store";
-import {FormAction, stopSubmit} from "redux-form";
+import {FormAction} from "redux-form";
 import {getAuthUserDataTC} from "./authReducer";
 
 const INITIALIZED_SUCCESS = "INITIALIZED_SUCCESS"
@@ -40,5 +39,4 @@ export const initializeApp = (): ThunkType => (dispatch) => {
         .then(() => {
         dispatch(initializedSuccess())
     })
-
 }
