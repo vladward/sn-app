@@ -15,31 +15,6 @@ type LoginFormDataType = {
     isAuth: boolean
 }
 
-const mapStateToProps = (state: AppStateType) => {
-    return {
-        isAuth: state.auth.isAuth
-    }
-}
-
-const Login = (props: any) => {
-    const onSubmit = (formData: any) => {
-        login(formData.email, formData.password, formData.rememberMe)
-            .then(() => {
-                return <Redirect to={'/profile'}/>
-            })
-    }
-
-    if (props.isAuth) {
-        return <Redirect to={'/profile'}/>
-    }
-    return (
-        <>
-            <h1>Login</h1>
-            <ReduxLoginForm onSubmit={onSubmit}/>
-        </>
-    )
-}
-
 const LoginForm: React.FC<InjectedFormProps<LoginFormDataType>> = (props) => {
     return (
         <form onSubmit={props.handleSubmit}>
@@ -70,5 +45,28 @@ const LoginForm: React.FC<InjectedFormProps<LoginFormDataType>> = (props) => {
     )
 }
 const ReduxLoginForm = reduxForm<LoginFormDataType>({form: 'login'})(LoginForm)
+
+const Login = (props: any) => {
+    const onSubmit = (formData: LoginFormDataType) => {
+        props.login(formData.email, formData.password, formData.rememberMe)
+    }
+
+    if (props.isAuth) {
+        return <Redirect to={'/profile'}/>
+    }
+
+    return (
+        <>
+            <h1>Login</h1>
+            <ReduxLoginForm onSubmit={onSubmit}/>
+        </>
+    )
+}
+
+const mapStateToProps = (state: AppStateType) => {
+    return {
+        isAuth: state.auth.isAuth
+    }
+}
 
 export default connect(mapStateToProps, {login})(Login)
