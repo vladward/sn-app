@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import Navbar from "./components/Navbar/Navbar";
-import {BrowserRouter, Route, withRouter} from "react-router-dom";
+import {Route, withRouter} from "react-router-dom";
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
 import UsersContainer from "./components/Users/UsersContainer";
 import ProfileContainer from "./components/Profile/ProfileContainer";
@@ -19,11 +19,6 @@ export type AppMapDispatchToPropsType = {
 export type AppMapStateToPropsType = {
     initialized: boolean
 }
-const mapStateToProps = (state: AppStateType) => {
-    return {
-        initialized: state.app.initialized
-    }
-}
 
 export type AppPropsType = AppMapStateToPropsType & AppMapDispatchToPropsType
 
@@ -37,9 +32,7 @@ class App extends React.Component<AppPropsType> {
                 <PreLoader/>
             </div>
         }
-        return (
-            <BrowserRouter>
-                <div className="app-wrapper">
+        return <div className="app-wrapper">
                     <HeaderContainer/>
                     <Navbar/>
                     <div className="app-wrapper-content">
@@ -53,11 +46,15 @@ class App extends React.Component<AppPropsType> {
                                render={() => <Login/>}/>
                     </div>
                 </div>
-            </BrowserRouter>
-        )
     }
 }
 
-export default compose(
+const mapStateToProps = (state: AppStateType) => {
+    return {
+        initialized: state.app.initialized
+    }
+}
+
+export default compose<React.ComponentType>(
     withRouter,
-    connect(mapStateToProps, {initializeApp})(App))
+    connect(mapStateToProps, {initializeApp}))(App)
