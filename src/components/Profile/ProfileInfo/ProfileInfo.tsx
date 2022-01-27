@@ -3,13 +3,14 @@ import s from "./ProfileInfo.module.css"
 import PreLoader from "../../PreLoader/PreLoader";
 import noPhoto from '../../../assets/noPhoto.jpg'
 import {ProfileContainerType} from "../ProfileContainer";
-import {ProfileStatus} from "./ProfileStatus/ProfileStatus";
+import {ProfileStatus} from './ProfileStatus/ProfileStatus'
 
 
 const ProfileInfo = (props: ProfileContainerType) => {
     if (!props.profile) {
         return <PreLoader/>
     }
+
     return (
         <div>
             <div>
