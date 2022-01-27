@@ -4,8 +4,10 @@ import Post from "./Post/Post"
 import {MyPostsContainerType} from "./MyPostsContainer";
 import {AddMessageFormDataType, AddMessageFormRedux} from "../../Dialogs/AddMessageForm/AddMessageForm";
 
-const MyPosts = (props: MyPostsContainerType) => {
-    let postsElements = props.profilePage.posts?.map(p => <Post key={p.id} message={p.message} likeCount={p.likeCount} id={p.id}/>)
+const MyPosts = React.memo((props: MyPostsContainerType) => {
+    console.log('my posts')
+    let postsElements =
+        props.profilePage.posts?.map(p => <Post key={p.id} message={p.message} likeCount={p.likeCount} id={p.id}/>)
 
     const addPost = (newPostText: AddMessageFormDataType) => {
         props.addPost(newPostText.newMessageBody)
@@ -22,5 +24,6 @@ const MyPosts = (props: MyPostsContainerType) => {
             </div>
         </div>
     )
-}
+})
+
 export default MyPosts
