@@ -50,7 +50,7 @@ export const profileReducer = (state: ProfileInitialStateType = profileInitialSt
         case ADD_POST: {
             return {
                 ...state,
-                posts: [...state.posts, {id: v1(), message: action.text, likeCount: 1}],
+                posts: [...state.posts, {id: v1(), message: action.text, likeCount: 0}],
             }
         }
         case SET_USER_PROFILE: {
