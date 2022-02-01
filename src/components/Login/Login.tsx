@@ -1,12 +1,12 @@
-import React from 'react'
+import React, {FC} from 'react'
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
-import {Input} from "../FormControls/FormControls";
+import {Input} from "../common/FormControls/FormControls";
 import {required} from "../../utils/validators/validators";
 import {login} from "../../api/auth";
 import {connect} from "react-redux";
 import {Redirect} from "react-router-dom";
 import {AppStateType} from "../../redux/redux-store";
-import s from '../FormControls/FormControls.module.css'
+import s from '../common/FormControls/FormControls.module.css'
 
 type LoginFormDataType = {
     email: string
@@ -15,9 +15,9 @@ type LoginFormDataType = {
     isAuth: boolean
 }
 
-const LoginForm: React.FC<InjectedFormProps<LoginFormDataType>> = (props) => {
+const LoginForm: FC<InjectedFormProps<LoginFormDataType>> = ({handleSubmit, error}) => {
     return (
-        <form onSubmit={props.handleSubmit}>
+        <form onSubmit={handleSubmit}>
             <div>
                 <Field placeholder="Login"
                        name="email"
@@ -38,8 +38,8 @@ const LoginForm: React.FC<InjectedFormProps<LoginFormDataType>> = (props) => {
             <div>
                 <button>Login</button>
             </div>
-            {props.error && <div className={s.formSummaryError}>
-                {props.error}
+            {error && <div className={s.formSummaryError}>
+                {error}
             </div>}
         </form>
     )

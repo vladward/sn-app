@@ -6,8 +6,8 @@ import {ProfileContainerType} from "../ProfileContainer";
 import {ProfileStatus} from './ProfileStatus/ProfileStatus'
 
 
-const ProfileInfo = (props: ProfileContainerType) => {
-    if (!props.profile) {
+const ProfileInfo = ({profile, status, updateUserStatusTC}: ProfileContainerType) => {
+    if (!profile) {
         return <PreLoader/>
     }
 
@@ -16,10 +16,10 @@ const ProfileInfo = (props: ProfileContainerType) => {
             <div>
                 <img className={s.profileImage} src="https://tinypng.com/images/social/website.jpg" alt="profImg"/>
             </div>
-            {props.profile ? <div className={s.descriptionBlock}>
-                <img src={props.profile.photos.large ? props.profile.photos.large : noPhoto} alt="userImg"/>
+            {profile ? <div className={s.descriptionBlock}>
+                <img src={profile.photos.large ? profile.photos.large : noPhoto} alt="userImg"/>
             </div> : null}
-            <ProfileStatus status={props.status} updateUserStatusTC={props.updateUserStatusTC}/>
+            <ProfileStatus status={status} updateUserStatusTC={updateUserStatusTC}/>
         </div>
     )
 }

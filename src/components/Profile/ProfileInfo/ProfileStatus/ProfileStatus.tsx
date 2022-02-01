@@ -25,7 +25,7 @@ export const ProfileStatus: React.FC<ProfileStatusType> = ({status, updateUserSt
     }
 
     const onPressEnter = (e: KeyboardEvent<HTMLInputElement>) => {
-        if(e.key === 'Enter') {
+        if (e.key === 'Enter') {
             deActivateEditMode()
         }
     }

@@ -20,12 +20,8 @@ const AppInitialState: UsersInitialStateType = {
 
 export const appReducer = (state: UsersInitialStateType = AppInitialState, action: AppGeneralActionType): UsersInitialStateType => {
     switch (action.type) {
-        case INITIALIZED_SUCCESS: {
-            return {
-                ...state,
-                initialized: true,
-            }
-        }
+        case INITIALIZED_SUCCESS:
+            return {...state, initialized: true,}
         default:
             return state
     }

@@ -136,40 +136,34 @@ export const setFollowingInProgressAC = (isFetching: boolean, userId: string): s
 
 //thunk creators
 export const getUsersTC = (currentPage: number, pageSize: number): ThunkType => {
-    return (dispatch) => {
+    return async (dispatch) => {
         dispatch(setIsFetchingAC(true))
         dispatch(setCurrentPageAC(currentPage))
-        getAllUsers(currentPage, pageSize)
-            .then(res => {
-                dispatch(setIsFetchingAC(false))
-                dispatch(setUsersAC(res.items))
-                dispatch(setTotalUsersCountAC(res.totalCount))
-            })
+        let res = await getAllUsers(currentPage, pageSize)
+        dispatch(setIsFetchingAC(false))
+        dispatch(setUsersAC(res.items))
+        dispatch(setTotalUsersCountAC(res.totalCount))
     }
 }
 
 export const unFollowTC = (id: string): ThunkType => {
-    return (dispatch) => {
+    return async (dispatch) => {
         dispatch(setFollowingInProgressAC(true, id))
-        unfollowUser(id)
-            .then(response => {
-                if (response.resultCode === 0) {
-                    dispatch(unFollowAC(id))
-                }
-                dispatch(setFollowingInProgressAC(false, id))
-            })
+        let response = await unfollowUser(id)
+        if (response.resultCode === 0) {
+            dispatch(unFollowAC(id))
+        }
+        dispatch(setFollowingInProgressAC(false, id))
     }
 }
 
 export const followTC = (id: string): ThunkType => {
-    return (dispatch) => {
+    return async (dispatch) => {
         dispatch(setFollowingInProgressAC(true, id))
-        followUser(id)
-            .then(response => {
-                if (response.resultCode === 0) {
-                    dispatch(followAC(id))
-                }
-                dispatch(setFollowingInProgressAC(false, id))
-            })
+        let response = await followUser(id)
+        if (response.resultCode === 0) {
+            dispatch(followAC(id))
+        }
+        dispatch(setFollowingInProgressAC(false, id))
     }
 }
