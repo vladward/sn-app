@@ -15,6 +15,11 @@ test('length of posts should be incremented', () => {
     let newState = profileReducer(state, action)
 
     expect(newState.posts.length).toBe(4)
+})
+test('message of new post should be correct', () => {
+    let action = addPostActionCreator('hi Vlad')
+    let newState = profileReducer(state, action)
+
     expect(newState.posts[3].message).toBe('hi Vlad')
 })
 test('after delete length of messages should be decremented', () => {
