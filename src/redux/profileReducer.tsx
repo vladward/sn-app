@@ -25,7 +25,11 @@ export type DeletePostActionType = {
     id: string
 }
 
-export type ProfileActionType = AddPostActionType | SetUserProfileActionType | SetUserStatusActionType | DeletePostActionType
+export type ProfileActionType =
+    AddPostActionType
+    | SetUserProfileActionType
+    | SetUserStatusActionType
+    | DeletePostActionType
 
 export type ProfilePageType = {
     posts: PostsType[]
@@ -52,27 +56,21 @@ let profileInitialState: ProfilePageType = {
 
 export const profileReducer = (state: ProfileInitialStateType = profileInitialState, action: ProfileActionType): ProfileInitialStateType => {
     switch (action.type) {
-        case ADD_POST: {
-            return {
-                ...state,
-                posts: [...state.posts, {id: v1(), message: action.text, likeCount: 0}],
-            }
-        }
-        case SET_USER_PROFILE: {
+        case ADD_POST:
+            return {...state, posts: [...state.posts, {id: v1(), message: action.text, likeCount: 0}]}
+        case SET_USER_PROFILE:
             return {...state, profile: action.profile}
-        }
-        case SET_USER_STATUS: {
+        case SET_USER_STATUS:
             return {...state, status: action.status}
-        }
         case DELETE_POST:
-            return {...state,
-                posts: state.posts.filter( p => p.id !== action.id)}
+            return {...state, posts: state.posts.filter(p => p.id !== action.id)}
         default:
             return state
     }
 }
 
 export const addPostActionCreator = (text: string): AddPostActionType => ({type: ADD_POST, text}) as const
+
 export const setUserProfileAC = (profile: ProfileType): SetUserProfileActionType => ({
     type: SET_USER_PROFILE,
     profile
@@ -82,33 +80,30 @@ export const setUserStatusAC = (status: string): SetUserStatusActionType => ({
     type: SET_USER_STATUS,
     status
 }) as const
+
 export const updateUserStatusAC = (status: string): SetUserStatusActionType => ({
     type: SET_USER_STATUS,
     status
 }) as const
+
 export const deletePostAC = (id: string): DeletePostActionType => ({
     type: DELETE_POST,
     id
 }) as const
 
-export const getUserProfileTC = (id: string) => (dispatch: Dispatch) => {
-    getProfile(id)
-        .then(response => {
-            dispatch(setUserProfileAC(response.data))
-        })
+export const getUserProfileTC = (id: string) => async (dispatch: Dispatch) => {
+    let response = await getProfile(id)
+    dispatch(setUserProfileAC(response.data))
 }
 
-export const getUserStatusTC = (id: string) => (dispatch: Dispatch) => {
-    getStatus(id)
-        .then(response => {
-            dispatch(setUserStatusAC(response.data))
-        })
+export const getUserStatusTC = (id: string) => async (dispatch: Dispatch) => {
+    let response = await getStatus(id)
+    dispatch(setUserStatusAC(response.data))
 }
-export const updateUserStatusTC = (status: string) => (dispatch: Dispatch) => {
-    updateStatus(status)
-        .then(response => {
-            if (response.data.resultCode === 0) {
-                dispatch(setUserStatusAC(status))
-            }
-        })
+
+export const updateUserStatusTC = (status: string) => async (dispatch: Dispatch) => {
+    let response = await updateStatus(status)
+    if (response.data.resultCode === 0) {
+        dispatch(setUserStatusAC(status))
+    }
 }
