@@ -1,0 +1,16 @@
+.userPhoto {
+    width: 100%;
+    height: auto;
+    border-radius: 50%;
+    padding: 7px;
+}
+
+.userPhotoContainer {
+    width: 100px;
+    height: 100px;
+    padding: 10px;
+}
+
+.userPhotoContainer img {
+    cursor: pointer;
+}
