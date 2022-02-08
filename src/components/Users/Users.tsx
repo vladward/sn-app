@@ -15,7 +15,14 @@ type UsersComponentType = {
     unFollowTC: (id: string) => void
 }
 
-export const Users = ({totalUsersCount, pageSize, currentPage, setCurrentPageHandler, users, ...props}: UsersComponentType) => {
+export const Users = ({
+                          totalUsersCount,
+                          pageSize,
+                          currentPage,
+                          setCurrentPageHandler,
+                          users,
+                          ...props
+                      }: UsersComponentType) => {
 
     let pagesCount = Math.ceil(totalUsersCount / pageSize)
     let pages = []
@@ -25,7 +32,11 @@ export const Users = ({totalUsersCount, pageSize, currentPage, setCurrentPageHan
 
     return (
         <div>
-            <Paginator currentPage={currentPage} totalUsersCount={totalUsersCount} pageSize={pageSize} setCurrentPageHandler={setCurrentPageHandler}/>
+            <Paginator currentPage={currentPage}
+                       totalUsersCount={totalUsersCount}
+                       pageSize={pageSize}
+                       setCurrentPageHandler={setCurrentPageHandler}
+                       portionSize={10}/>
             {users.map(u => <User user={u}
                                   followingInProgress={props.followingInProgress}
                                   key={u.id}
