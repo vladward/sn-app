@@ -9,3 +9,12 @@ export const getStatus = (userId) => {
 export const updateStatus = (status) => {
     return instance.put(`profile/status/`, {status}) // status: status
 }
+export const setPhoto = (photoFile) => {
+    let formData = new FormData()
+    formData.append('image', photoFile)
+    return instance.put('profile/photo', formData, {
+        headers: {
+            'Content-type': 'multipart/form-data'
+        }
+    })
+}
